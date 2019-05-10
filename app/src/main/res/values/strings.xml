@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">TravelNepalapp</string>
+    <string name="my_image">my image</string>
+    <string name="bikal_shrestha">Bikal Shrestha</string>
+    <string name="bikal3_bs_gmail_com">bikal3.bs@gmail.com</string>
+    <string name="inbox">inbox</string>
+    <string name="setting">setting</string>
+    <string name="open_drawer">Open Navigation Drawer </string>
+    <string name="close_drawer">Close Navigation Drawer </string>
+    <string name="Username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="signup">Create an account</string>
+    <string name="first_name">First Name</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="register">Register</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
