@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Signup">
+    tools:context=".Signup"
+    android:background="@drawable/backgroundgradient">
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -23,8 +24,6 @@
         android:layout_below="@id/tv_register"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logo"
-
         />
     <android.support.v7.widget.AppCompatButton
         android:layout_width="wrap_content"
@@ -135,12 +134,15 @@
 
     </android.support.design.widget.TextInputLayout>
     <android.support.v7.widget.AppCompatButton
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:textSize="25dp"
-        android:layout_margin="10dp"
+        android:background="@drawable/buttonlayout"
+
+        android:layout_marginLeft="50dp"
         android:layout_below="@id/til_phonenumber"
+        android:layout_marginTop="20dp"
         android:textAllCaps="false"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>
