@@ -1,52 +1,75 @@
-package com.example.travelnepalapp;
+package com.example.travelnepalapp.Fragments;
+
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class Signup extends AppCompatActivity {
+import com.example.travelnepalapp.R;
+
+import java.io.File;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class SignupFragment extends Fragment {
+    Activity context;
     ImageView ivimage;
+    Uri  imageUri;
     Integer REQUEST_CAMERA=1, SELECT_FILE=0;
     Button fab;
+
+    public SignupFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-        ivimage=findViewById(R.id.iv_uploadimage);
-        fab=findViewById(R.id.btn_imagebutton);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        View view= inflater.inflate(R.layout.fragment_signup, container, false);
+        ivimage=view.findViewById(R.id.iv_uploadimage);
+        fab=view.findViewById(R.id.btn_imagebutton);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SelectImage();
-
             }
         });
+        return view;
     }
-
-    private void SelectImage() {
+    private void SelectImage(){
         final CharSequence[] items={"Camera","Gallery", "Cancel"};
-        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+        context=getActivity();
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
         builder.setTitle("Add Image");
 
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                                if (items[i].equals("Camera")) {
-
+                if (items[i].equals("Camera")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_CAMERA);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivityForResult(intent, REQUEST_CAMERA);
+                    }
 
                 } else if (items[i].equals("Gallery")) {
 
@@ -61,7 +84,6 @@ public class Signup extends AppCompatActivity {
         });
         builder.show();
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -69,9 +91,8 @@ public class Signup extends AppCompatActivity {
 
             if(requestCode==REQUEST_CAMERA){
 
-                Bundle bundle = data.getExtras();
-                final Bitmap bmp = (Bitmap) bundle.get("data");
-                ivimage.setImageBitmap(bmp);
+
+                ivimage.setImageURI(imageUri);
 
             }else if(requestCode==SELECT_FILE){
 

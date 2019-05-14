@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.SignupFragment"
+    android:id="@+id/fragment_signup">
+
+    <!-- TODO: Update blank fragment layout -->
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@drawable/backgroundgradient">
+
+       <android.support.v7.widget.AppCompatImageView
+           android:layout_width="120dp"
+           android:layout_height="120dp"
+           android:id="@+id/iv_uploadimage"
+           android:layout_marginTop="10dp"
+           android:layout_centerHorizontal="true"
+           />
+       <android.support.v7.widget.AppCompatButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Upload Image"
+           android:id="@+id/btn_imagebutton"
+           android:layout_toLeftOf="@id/iv_uploadimage"
+           android:layout_marginTop="30dp"
+           style="@style/FlatButton"
+           />
+
+       <android.support.design.widget.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/iv_uploadimage"
+           android:id="@+id/til_fullname"
+           android:layout_marginTop="10dp"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           >
+           <android.support.design.widget.TextInputEditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/fullname"
+               android:id="@+id/et_fullname"/>
+
+       </android.support.design.widget.TextInputLayout>
+
+       <android.support.design.widget.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/til_fullname"
+           android:layout_marginTop="10dp"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:id="@+id/til_email">
+           <android.support.design.widget.TextInputEditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/email"
+               android:id="@+id/et_email"/>
+
+       </android.support.design.widget.TextInputLayout>
+
+       <android.support.design.widget.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/til_email"
+           android:layout_marginTop="10dp"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:id="@+id/til_rpassword">
+           <android.support.design.widget.TextInputEditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/password"
+               android:id="@+id/et_rpassword"/>
+
+       </android.support.design.widget.TextInputLayout>
+
+       <android.support.v7.widget.AppCompatButton
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/register"
+           android:textSize="25dp"
+           android:background="@drawable/buttonlayout"
+
+           android:layout_marginLeft="50dp"
+           android:layout_below="@id/til_rpassword"
+           android:layout_marginTop="20dp"
+           android:textAllCaps="false"
+           android:layout_centerHorizontal="true"/>
+   </RelativeLayout>
+</FrameLayout>
