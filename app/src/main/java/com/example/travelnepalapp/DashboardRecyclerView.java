@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.travelnepalapp.Model.DashboardModel;
+import com.example.travelnepalapp.Models.DashboardModel;
 
 import java.util.List;
 

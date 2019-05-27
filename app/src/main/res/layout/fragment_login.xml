@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.LoginFragment">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,22 +36,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:id="@+id/et_username"
-                android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
+                android:drawableStart="@drawable/ic_email_black_24dp"
                 android:hint="@string/email"
                 android:background="@drawable/edittextlayout"
                 android:inputType="text"
-                />
+                android:drawableLeft="@drawable/ic_email_black_24dp" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:id="@+id/til_password"
-
             android:layout_below="@id/til_username"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginBottom="8dp"
+            app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
             <android.support.v7.widget.AppCompatEditText
@@ -58,9 +59,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/et_password"
                 android:hint="@string/password"
-                android:drawableLeft="@drawable/ic_lock_black_24dp"
+                android:drawableStart="@drawable/ic_lock_black_24dp"
                 android:inputType="textPassword"
-                />
+                android:drawableLeft="@drawable/ic_lock_black_24dp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
