@@ -16,22 +16,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.travelnepalapp.API.UserAPI;
+import com.example.travelnepalapp.Models.UserModel;
 import com.example.travelnepalapp.R;
+import com.example.travelnepalapp.Retrofit.RetrofitHelper;
 
 import java.io.File;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignupFragment extends Fragment {
+public class SignupFragment extends Fragment implements View.OnClickListener {
     Activity context;
     ImageView ivimage;
-    Uri  imageUri;
-    Integer REQUEST_CAMERA=1, SELECT_FILE=0;
-    Button fab;
+    Uri imageUri;
+    Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
+    Button fab, register;
+
+    EditText name, email, passwords;
 
     public SignupFragment() {
         // Required empty public constructor
@@ -43,21 +54,25 @@ public class SignupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view= inflater.inflate(R.layout.fragment_signup, container, false);
-        ivimage=view.findViewById(R.id.iv_uploadimage);
-        fab=view.findViewById(R.id.btn_imagebutton);
+        View view = inflater.inflate(R.layout.fragment_signup, container, false);
+        ivimage = view.findViewById(R.id.iv_uploadimage);
+        fab = view.findViewById(R.id.btn_imagebutton);
+        register = view.findViewById(R.id.btn_resigerbutton);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SelectImage();
-            }
-        });
+        name=view.findViewById(R.id.et_fullname_register);
+        email=view.findViewById(R.id.et_email_resgister);
+        passwords=view.findViewById(R.id.et_password_resgister);
+
+
+        register.setOnClickListener(this);
+        fab.setOnClickListener(this);
+
         return view;
     }
-    private void SelectImage(){
-        final CharSequence[] items={"Camera","Gallery", "Cancel"};
-        context=getActivity();
+
+    private void SelectImage() {
+        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+        context = getActivity();
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Add Image");
@@ -84,17 +99,18 @@ public class SignupFragment extends Fragment {
         });
         builder.show();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode== Activity.RESULT_OK){
+        if (resultCode == Activity.RESULT_OK) {
 
-            if(requestCode==REQUEST_CAMERA){
+            if (requestCode == REQUEST_CAMERA) {
 
 
                 ivimage.setImageURI(imageUri);
 
-            }else if(requestCode==SELECT_FILE){
+            } else if (requestCode == SELECT_FILE) {
 
                 Uri selectedImageUri = data.getData();
                 ivimage.setImageURI(selectedImageUri);
@@ -104,4 +120,43 @@ public class SignupFragment extends Fragment {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_imagebutton:
+                SelectImage();
+                break;
+            case R.id.btn_resigerbutton:
+                registration();
+                break;
+        }
+
+    }
+
+    private void registration() {
+        String fullname = name.getText().toString();
+        String emails = email.getText().toString();
+        String pass = passwords.getText().toString();
+
+        UserModel userModel = new UserModel(fullname, emails, pass);
+        UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
+        Call<Void> usercall = userAPI.addUser(userModel);
+        usercall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+//                if (!response.isSuccessful()) {
+//                    Toast.makeText(context, "Code", Toast.LENGTH_SHORT).show();
+//                    return; }
+                Toast.makeText(getActivity(), "Successfully Added", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getActivity(), "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+    }
 }

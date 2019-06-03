@@ -41,7 +41,7 @@
            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
            >
            <android.support.design.widget.TextInputEditText
-               android:id="@+id/et_fullname"
+               android:id="@+id/et_fullname_register"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:hint="@string/fullname"
@@ -60,7 +60,7 @@
            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
            android:id="@+id/til_email">
            <android.support.design.widget.TextInputEditText
-               android:id="@+id/et_email"
+               android:id="@+id/et_email_resgister"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:hint="@string/email"
@@ -80,7 +80,7 @@
            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
            android:id="@+id/til_rpassword">
            <android.support.design.widget.TextInputEditText
-               android:id="@+id/et_rpassword"
+               android:id="@+id/et_password_resgister"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:hint="@string/password"

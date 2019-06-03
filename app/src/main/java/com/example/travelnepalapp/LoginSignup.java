@@ -12,6 +12,7 @@ import com.example.travelnepalapp.Fragments.SignupFragment;
 public class LoginSignup extends AppCompatActivity {
     ViewPager viewPager;
     TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,9 +20,9 @@ public class LoginSignup extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tablayout);
 
-        LoginSignupAdapter adapter= new LoginSignupAdapter(getSupportFragmentManager());
-        adapter.addFragment(new LoginFragment(),"Login");
-        adapter.addFragment(new SignupFragment(),"Register");
+        LoginSignupAdapter adapter = new LoginSignupAdapter(getSupportFragmentManager());
+        adapter.addFragment(new LoginFragment(), "Login");
+        adapter.addFragment(new SignupFragment(), "Register");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

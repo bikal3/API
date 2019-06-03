@@ -26,15 +26,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View rootView= LayoutInflater.from(context).inflate(R.layout.dashboardlayout,viewGroup,false);
+        View rootView = LayoutInflater.from(context).inflate(R.layout.dashboardlayout, viewGroup, false);
 
         return new ViewHolder(rootView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-    DashboardModel dashboardModel= dashboardModelList.get(i);
-    viewHolder.tv_imagename.setText(dashboardModel.getPlacename());
+        DashboardModel dashboardModel = dashboardModelList.get(i);
+        viewHolder.tv_imagename.setText(dashboardModel.getPlacename());
     }
 
     @Override
@@ -48,8 +48,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            iv_image=itemView.findViewById(R.id.iv_mainimage);
-            tv_imagename=itemView.findViewById(R.id.tv_placename);
+            iv_image = itemView.findViewById(R.id.iv_mainimage);
+            tv_imagename = itemView.findViewById(R.id.tv_placename);
 
         }
     }

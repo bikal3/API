@@ -17,9 +17,9 @@ public class DashboardRecyclerView extends RecyclerView.Adapter<DashboardRecycle
     Context context;
     List<DashboardModel> dashboardList;
 
-    public DashboardRecyclerView(Context context,List<DashboardModel> dashboardList){
-        this.context=context;
-        this.dashboardList=dashboardList;
+    public DashboardRecyclerView(Context context, List<DashboardModel> dashboardList) {
+        this.context = context;
+        this.dashboardList = dashboardList;
     }
 
 
@@ -27,14 +27,14 @@ public class DashboardRecyclerView extends RecyclerView.Adapter<DashboardRecycle
 
     @Override
     public DashboardViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-       View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dashboardlayout,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dashboardlayout, viewGroup, false);
 
         return new DashboardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DashboardViewHolder dashboardViewHolder, int i) {
-        final DashboardModel dashboardModel=dashboardList.get(i);
+        final DashboardModel dashboardModel = dashboardList.get(i);
         dashboardViewHolder.tvplacename.setText(dashboardModel.getPlacename());
         dashboardViewHolder.mainimage.setImageResource(dashboardModel.getImage());
 
@@ -44,13 +44,15 @@ public class DashboardRecyclerView extends RecyclerView.Adapter<DashboardRecycle
     public int getItemCount() {
         return dashboardList.size();
     }
-    public class DashboardViewHolder extends RecyclerView.ViewHolder{
+
+    public class DashboardViewHolder extends RecyclerView.ViewHolder {
         public ImageView mainimage;
         TextView tvplacename;
-        public DashboardViewHolder(@NonNull View iview){
+
+        public DashboardViewHolder(@NonNull View iview) {
             super(iview);
-            mainimage=iview.findViewById(R.id.iv_mainimage);
-            tvplacename=iview.findViewById(R.id.tv_placename);
+            mainimage = iview.findViewById(R.id.iv_mainimage);
+            tvplacename = iview.findViewById(R.id.tv_placename);
         }
     }
 }

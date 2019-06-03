@@ -19,11 +19,11 @@ import com.example.travelnepalapp.Models.DashboardModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-Toolbar toolbar;
-DrawerLayout drawerLayout;
-NavigationView navigationView;
-MenuItem menuItem;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    MenuItem menuItem;
     private String data = "";
 
     private RecyclerView recyclerAdapter;
@@ -36,10 +36,10 @@ MenuItem menuItem;
         setContentView(R.layout.navigation_drawer);
 
 
-        toolbar=findViewById(R.id.toolbar);
-        menuItem=findViewById(R.id.it_setting);
-        drawerLayout=findViewById(R.id.drawer_layout);
-        navigationView=findViewById(R.id.navigation_view);
+        toolbar = findViewById(R.id.toolbar);
+        menuItem = findViewById(R.id.it_setting);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
         setSupportActionBar(toolbar);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -50,22 +50,22 @@ MenuItem menuItem;
         recyclerAdapter.setAdapter(new DashboardRecyclerView(getApplicationContext(), dashboardModels));
 
 
-        ActionBarDrawerToggle toggle= new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        int id= menuItem.getItemId();
-        switch (id){
+        int id = menuItem.getItemId();
+        switch (id) {
             case R.id.it_setting:
                 Intent intent = new Intent(MainActivity.this, LoginSignup.class);
                 startActivity(intent);
 
                 break;
             case R.id.it_setting1:
-                Intent intent1 = new Intent(MainActivity.this,LoginSignup.class);
+                Intent intent1 = new Intent(MainActivity.this, LoginSignup.class);
                 startActivity(intent1);
 
         }
@@ -74,8 +74,8 @@ MenuItem menuItem;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater= getMenuInflater();
-        inflater.inflate(R.menu.navigation_menu,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation_menu, menu);
 
         return true;
     }
