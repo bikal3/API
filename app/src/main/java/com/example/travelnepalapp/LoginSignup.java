@@ -27,5 +27,6 @@ public class LoginSignup extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
     }
 }

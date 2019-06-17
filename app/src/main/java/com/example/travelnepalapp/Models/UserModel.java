@@ -1,22 +1,42 @@
 package com.example.travelnepalapp.Models;
 
 public class UserModel {
-    private String fullName;
+    private String name;
     private String email;
+    private String username;
     private String password;
+    private String passwordConf;
 
-    public UserModel(String fullName, String email, String password) {
-        this.fullName = fullName;
+    public UserModel(String name, String email, String username, String password,String passwordConf) {
+        this.name=name;
         this.email = email;
+        this.username = username;
         this.password = password;
+        this.passwordConf=passwordConf;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswordConf() {
+        return passwordConf;
+    }
+
+    public void setPasswordConf(String passwordConf) {
+        this.passwordConf = passwordConf;
     }
 
     public String getEmail() {

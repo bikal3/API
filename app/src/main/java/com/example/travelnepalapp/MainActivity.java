@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.travelnepalapp.Models.DashboardModel;
 
@@ -37,11 +38,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         toolbar = findViewById(R.id.toolbar);
-        menuItem = findViewById(R.id.it_setting);
+        menuItem = findViewById(R.id.updateprofile);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         setSupportActionBar(toolbar);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
         recyclerAdapter = findViewById(R.id.rv_recyclerview);
 //        recyclerAdapter.setLayoutManager(new GridLayoutManager(this, 2));
@@ -58,9 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
+
         switch (id) {
-            case R.id.it_setting:
-                Intent intent = new Intent(MainActivity.this, LoginSignup.class);
+            case R.id.updateprofile:
+
+                Intent intent = new Intent(MainActivity.this, UpdateProfile.class);
                 startActivity(intent);
 
                 break;

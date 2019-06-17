@@ -19,8 +19,11 @@ import android.widget.Toast;
 
 import com.example.travelnepalapp.API.UserAPI;
 import com.example.travelnepalapp.MainActivity;
+import com.example.travelnepalapp.Models.Authtoken;
+import com.example.travelnepalapp.Models.Authtoken;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
+import com.example.travelnepalapp.SharedPref;
 
 import java.util.regex.Pattern;
 
@@ -35,9 +38,6 @@ import retrofit2.Response;
 public class LoginFragment extends Fragment implements View.OnClickListener {
     Button signup, login;
     EditText email, password;
-    SharedPreferences.Editor editor;
-    SharedPreferences sharedPreferences;
-    Boolean isloggedin;
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" + //at least 1 digit
@@ -65,12 +65,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         signup = view.findViewById(R.id.btn_signup);
         login = view.findViewById(R.id.btn_login);
 
-        sharedPreferences = this.getActivity().getSharedPreferences("APP", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
         login.setOnClickListener(this);
         signup.setOnClickListener(this);
         return view;
+
     }
 
 
@@ -138,28 +136,30 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void checkUser() {
-        if (!validateEmail() | !validatepassword()) {
+        if (loginvalidation()) {
             String emails = email.getText().toString().trim();
             String pass = password.getText().toString().trim();
 
             UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
-            Call<String> logincall = userAPI.login(emails, pass);
+            Call<Authtoken> logincall = userAPI.login(emails, pass);
 
-            logincall.enqueue(new Callback<String>() {
+            logincall.enqueue(new Callback<Authtoken>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-                    isloggedin = true;
-                    editor.putBoolean("loginchecker", isloggedin);
-                    editor.commit();
-
+                public void onResponse(Call<Authtoken> call, Response<Authtoken> response) {
+                    if(!response.isSuccessful()){
+                        Toast.makeText(getActivity(),response.code(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Authtoken res=response.body();
+                    new SharedPref(getActivity()).SessionStart(res.getMessage(),res.getToken());
+//                    Toast.makeText(getActivity(), res.getToken(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                     getActivity().finish();
                 }
 
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<Authtoken> call, Throwable t) {
                     Toast.makeText(getActivity(), "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
