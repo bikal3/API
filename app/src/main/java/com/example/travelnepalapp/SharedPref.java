@@ -35,7 +35,7 @@ public class SharedPref {
         return sharedPreferences.getString(USER_ID,"");
     }
     public String TOKEN(){
-        return sharedPreferences.getString(TOKEN(),"");
+        return sharedPreferences.getString(TOKEN,"");
     }
     public void SessionEnd(){
         editor.putBoolean(IS_USER_LOGIN,false);

@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -30,7 +31,7 @@ public interface UserAPI {
     @POST("updateprofile")
     Call<UserModel> updateprofle(@Body UserModel userModel);
 
-
-
+    @GET("profile/{id}")
+    Call<UserModel> loadprofile(@Part ("id") String id);
 
 }

@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UpdateProfile"></activity>
+        <activity android:name=".AddPost"></activity>
+        <activity android:name=".UpdateProfile" />
         <activity android:name=".LoginSignup" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">

@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
         recyclerAdapter = findViewById(R.id.rv_recyclerview);
 //        recyclerAdapter.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerAdapter.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -64,14 +63,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.updateprofile:
-
                 Intent intent = new Intent(MainActivity.this, UpdateProfile.class);
                 startActivity(intent);
-
                 break;
-            case R.id.it_setting1:
-                Intent intent1 = new Intent(MainActivity.this, LoginSignup.class);
+
+            case R.id.addpost:
+                Intent intent1 = new Intent(MainActivity.this, AddPost.class);
                 startActivity(intent1);
+                break;
+
+            case R.id.dashboard:
+                Intent intent2= new Intent(MainActivity.this,MainActivity.class);
+                startActivity(intent2);
+                break;
 
         }
         return false;

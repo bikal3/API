@@ -18,4 +18,20 @@ public class Authtoken
     public String getToken() {
         return token;
     }
+
+    public void setSuccess(String success) {
+        Success = success;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
