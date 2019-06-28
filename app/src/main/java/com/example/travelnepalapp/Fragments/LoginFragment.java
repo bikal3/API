@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +22,9 @@ import com.example.travelnepalapp.API.UserAPI;
 import com.example.travelnepalapp.MainActivity;
 import com.example.travelnepalapp.Models.Authtoken;
 import com.example.travelnepalapp.Models.Authtoken;
+import com.example.travelnepalapp.Models.UserModel;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
-import com.example.travelnepalapp.SharedPref;
 
 import java.util.regex.Pattern;
 
@@ -36,6 +37,8 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends Fragment implements View.OnClickListener {
+    String mail = "";
+    String pass = "";
     Button signup, login;
     EditText email, password;
     private static final Pattern PASSWORD_PATTERN =
@@ -119,6 +122,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
     private boolean validatepassword() {
         String passwordinput = email.getText().toString().trim();
         if (passwordinput.isEmpty()) {
@@ -138,7 +142,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void checkUser() {
         if (loginvalidation()) {
             String emails = email.getText().toString().trim();
-            String pass = password.getText().toString().trim();
+            final String pass = password.getText().toString().trim();
 
             UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
             Call<Authtoken> logincall = userAPI.login(emails, pass);
@@ -146,13 +150,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             logincall.enqueue(new Callback<Authtoken>() {
                 @Override
                 public void onResponse(Call<Authtoken> call, Response<Authtoken> response) {
-                    if(!response.isSuccessful()){
-                        Toast.makeText(getActivity(),response.code(), Toast.LENGTH_SHORT).show();
+                    Authtoken token = response.body();
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Authtoken res=response.body();
-                    new SharedPref(getActivity()).SessionStart(res.getMessage(),res.getToken());
-//                    Toast.makeText(getActivity(), res.getToken(), Toast.LENGTH_SHORT).show();
+                    SharedPreferences preferences = getActivity().getSharedPreferences("UserToken", 0);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("username", token.getUsername());
+                    editor.putString("token", token.getToken());
+                    editor.putString("_id", token.getId());
+                    editor.putString("email", mail);
+                    editor.putString("password", pass);
+
+                    editor.commit();
+
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                     getActivity().finish();

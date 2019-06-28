@@ -7,6 +7,7 @@ import android.media.session.MediaSession;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,13 +39,15 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_update_profile);
 
 
+
         fullname=findViewById(R.id.et_fullname_update);
-        email=findViewById(R.id.et_fullname_update);
-        user=findViewById(R.id.et_fullname_update);
-        password=findViewById(R.id.et_fullname_update);
-        passwordd=findViewById(R.id.et_fullname_update);
+        email=findViewById(R.id.et_email_update);
+        user=findViewById(R.id.et_username_update);
+        password=findViewById(R.id.et_password_update);
+        passwordd=findViewById(R.id.et_password2_update);
 
         btnupdate=findViewById(R.id.btn_update);
+
         btnupdate.setOnClickListener(this);
 //        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 
@@ -54,22 +57,25 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
 
     private void Load() {
         UserAPI userAPI= RetrofitHelper.instance().create(UserAPI.class);
+
         Call<UserModel> userModelCall=userAPI.loadprofile(id);
+
          userModelCall.enqueue(new Callback<UserModel>() {
              @Override
              public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-                 fullname.setText(response.body().getName());
-                 email.setText(response.body().getEmail());
-                 user.setText(response.body().getUsername());
-                 password.setText(response.body().getPassword());
-                 passwordd.setText(response.body().getPasswordConf());
-
                  UserModel userModel=response.body();
 
-//                 new SharedPref(getActivity()).SessionStart(res.getMessage(),res.getToken());
+                 fullname.setText(userModel.getName());
+                 email.setText(userModel.getEmail());
+                 user.setText(userModel.getUsername());
+                 password.setText(userModel.getPassword());
+                 passwordd.setText(userModel.getPasswordConf());
+
+
+//                 Log.d("myTag", userModel.getName());
 //                 new SharedPref(activity).UserID();
                  Toast.makeText(UpdateProfile.this, userModel.getId(), Toast.LENGTH_SHORT).show();
-                 
+
 
              }
 

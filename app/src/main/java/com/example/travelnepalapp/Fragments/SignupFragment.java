@@ -36,12 +36,7 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class SignupFragment extends Fragment implements View.OnClickListener {
-    Activity context;
-    ImageView ivimage;
-    Uri imageUri;
-    Bitmap bitmap;
-    private static final int PICK_IMAGE = 1;
-    Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
+
     Button fab, register;
 
     EditText name, email, passwords, imagename, username, passwordds;
@@ -57,8 +52,6 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_signup, container, false);
-//        ivimage = view.findViewById(R.id.iv_uploadimage);
-//        fab = view.findViewById(R.id.btn_imagebutton);
         register = view.findViewById(R.id.btn_resigerbutton);
 
         name = view.findViewById(R.id.et_fullname_register);
@@ -66,11 +59,9 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         passwords = view.findViewById(R.id.et_password_resgister);
         passwordds = view.findViewById(R.id.et_password2_resgister);
         username = view.findViewById(R.id.et_username_resgister);
-//        imagename=view.findViewById(R.id.et_image_editname);
 
 
         register.setOnClickListener(this);
-//        fab.setOnClickListener(this);
 
         return view;
     }
@@ -88,79 +79,6 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-
-//    private void SelectImage() {
-//        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
-//        context = getActivity();
-//        AlertDialog.Builder builder;
-//        builder = new AlertDialog.Builder(context);
-//        builder.setTitle("Add Image");
-//
-//        builder.setItems(items, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int i) {
-//                if (items[i].equals("Camera")) {
-//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-//                        startActivityForResult(intent, REQUEST_CAMERA);
-//                    }
-//
-//                } else if (items[i].equals("Gallery")) {
-//
-//                    Intent gallery = new Intent();
-//                    gallery.setType("image/*");
-//                    gallery.setAction(Intent.ACTION_GET_CONTENT);
-//                    startActivityForResult(Intent.createChooser(gallery, "Choose Image"), PICK_IMAGE);
-//
-//
-//                } else if (items[i].equals("Cancel")) {
-//                    dialog.dismiss();
-//                }
-//            }
-//        });
-//        builder.show();
-//    }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (resultCode == Activity.RESULT_OK) {
-//
-//            if (requestCode == REQUEST_CAMERA) {
-//
-//
-//                ivimage.setImageURI(imageUri);
-//                UploadImage(bitmap);
-//
-//            }
-//            else if ( requestCode == PICK_IMAGE && requestCode == SELECT_FILE) {
-//
-//                imageUri = data.getData();
-//                try {
-//                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                ivimage.setImageURI(imageUri);
-//                UploadImage(bitmap);
-//            }
-////             else if (requestCode == PICK_IMAGE && resultCode == SELECT_FILE) {
-////                imageUri = data.getData();
-////                try {
-////                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-////                    ivimage.setImageBitmap(bitmap);
-////
-////                } catch (IOException e) {
-////                    e.printStackTrace();
-////
-////                }
-////
-////            }
-//
-//        }
-//
-//    }
 
 
     private void registration() {

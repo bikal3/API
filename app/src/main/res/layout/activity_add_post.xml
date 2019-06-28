@@ -8,7 +8,7 @@
     tools:context=".AddPost">
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/imagebutton"
+        android:id="@+id/btn_post_selectimage"
         style="@style/FlatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,20 +19,20 @@
     //android:background="@drawable/flatbuttonboarder"
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/iv_img_additem"
+        android:id="@+id/iv_post_img_"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="@drawable/imageboarder" />
+        />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/imageupload"
+        android:id="@+id/btn_post_imageupload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="80dp"
-        android:layout_toRightOf="@id/iv_img_additem"
+        android:layout_toRightOf="@id/iv_post_img_"
         android:text="Upload Image"
         android:background="@drawable/plainbutton"
 
@@ -43,11 +43,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_img_additem"
+        android:layout_below="@id/iv_post_img_"
         android:layout_margin="20dp">
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_name_additem"
+            android:id="@+id/et_post_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/post_title" />
@@ -63,10 +63,10 @@
         android:layout_margin="20dp">
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_postlocation"
+            android:id="@+id/et_post_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Add Price" />
+            android:hint="Add Location" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -78,7 +78,7 @@
         android:layout_margin="20dp">
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_desc_additem"
+            android:id="@+id/et_post_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Add Description"
@@ -96,7 +96,7 @@
 
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/tv_img_imgname_additem"
+            android:id="@+id/et_post_imagename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/til_postdesc"
@@ -104,7 +104,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_add_addpost"
+        android:id="@+id/btn_post_addpost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/til_postdesc"

@@ -6,6 +6,8 @@ public class Authtoken
     private String message;
     private String token;
     private String username;
+    private String _id;
+
 
     public String getSuccess() {
         return Success;
@@ -18,6 +20,10 @@ public class Authtoken
     public String getToken() {
         return token;
     }
+    public String getUsername() {
+        return username;
+    }
+
 
     public void setSuccess(String success) {
         Success = success;
@@ -33,5 +39,13 @@ public class Authtoken
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getId() {
+        return _id;
+    }
+
+    public void setId(String _id) {
+        this._id = _id;
     }
 }
