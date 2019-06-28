@@ -155,7 +155,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    SharedPreferences preferences = getActivity().getSharedPreferences("UserToken", 0);
+                    SharedPreferences preferences = getActivity().getSharedPreferences("localstorage", 0);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("username", token.getUsername());
                     editor.putString("token", token.getToken());

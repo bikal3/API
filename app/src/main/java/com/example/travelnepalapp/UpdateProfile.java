@@ -3,6 +3,7 @@ package com.example.travelnepalapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.session.MediaSession;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -57,23 +58,28 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
 
     private void Load() {
         UserAPI userAPI= RetrofitHelper.instance().create(UserAPI.class);
+        SharedPreferences preferences=getSharedPreferences("localstorage",0);
+         String id=preferences.getString("_id",null);
+         final String token=preferences.getString("token",null);
+         String username=preferences.getString("username",null);
 
-        Call<UserModel> userModelCall=userAPI.loadprofile(id);
+        Call<UserModel> userModelCall=userAPI.loadprofile(id,token,username);
 
          userModelCall.enqueue(new Callback<UserModel>() {
              @Override
              public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                  UserModel userModel=response.body();
-
-                 fullname.setText(userModel.getName());
+//
+                 fullname.setText(response.body().getName());
                  email.setText(userModel.getEmail());
                  user.setText(userModel.getUsername());
                  password.setText(userModel.getPassword());
                  passwordd.setText(userModel.getPasswordConf());
 
 
-//                 Log.d("myTag", userModel.getName());
-//                 new SharedPref(activity).UserID();
+                 Log.d("myTag", userModel.getName());
+                 Log.d("ids",token );
+//
                  Toast.makeText(UpdateProfile.this, userModel.getId(), Toast.LENGTH_SHORT).show();
 
 

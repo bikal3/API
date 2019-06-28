@@ -1,6 +1,7 @@
 package com.example.travelnepalapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -14,11 +15,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.travelnepalapp.API.PostAPI;
+import com.example.travelnepalapp.Adapters.DashboardAdapter;
 import com.example.travelnepalapp.Models.DashboardModel;
+import com.example.travelnepalapp.Models.PostModel;
+import com.example.travelnepalapp.Retrofit.RetrofitHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -47,9 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         recyclerAdapter = findViewById(R.id.rv_recyclerview);
 //        recyclerAdapter.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerAdapter.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
-        recyclerAdapter.setAdapter(new DashboardRecyclerView(getApplicationContext(), dashboardModels));
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);

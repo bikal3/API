@@ -19,7 +19,7 @@ import retrofit2.http.Path;
 public interface UserAPI {
 
     @POST("users/registration")
-        Call<String> addUser(@Body UserModel userModel);
+    Call<String> addUser(@Body UserModel userModel);
 
     @FormUrlEncoded
     @POST("users/login")
@@ -33,8 +33,11 @@ public interface UserAPI {
     @PUT("users/updateprofile")
     Call<UserModel> updateprofle(@Body UserModel userModel);
 
+    @FormUrlEncoded
+    @POST("users/profile")
+    Call<UserModel> loadprofile(@Field("_id") String id,
+                                @Field("token") String token,
+                                @Field("username") String username);
 
-    @GET("users/profile/{id}")
-    Call<UserModel> loadprofile(@Path ("id") String id);
 
 }

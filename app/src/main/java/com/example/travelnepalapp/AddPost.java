@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -76,6 +77,7 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.btn_post_addpost:
+                post();
 
                 break;
 
@@ -86,7 +88,9 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
-//
+
+
+    //
 //    private void SelectImage() {
 //        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
 //        context= this;
@@ -211,7 +215,44 @@ private void Opengallery() {
         }
     }
 
+    private void post() {
+        String title=addtitle.getText().toString();
+        String image=imagename.getText().toString();
+        String desc=adddesc.getText().toString();
+        String location=addlocation.getText().toString();
+        SharedPreferences preferences=getSharedPreferences("localstorage",0);
+        String token= preferences.getString("token",null);
+        String id= preferences.getString("_id",null);
+        String user=preferences.getString("username",null);
 
+        PostAPI postAPI=RetrofitHelper.instance().create(PostAPI.class);
+        Call<String> postcall=postAPI.addpost(title,location,image,desc,user,token,id);
+        postcall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(context, "Post Added", Toast.LENGTH_SHORT).show();
+                reset();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(context, "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+
+    }
+private void reset(){
+        addtitle.setText("");
+        adddesc.setText("");
+        addlocation.setText("");
+        imagename.setText("");
+}
 
 
 }

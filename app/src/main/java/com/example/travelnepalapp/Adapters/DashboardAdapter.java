@@ -9,18 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.travelnepalapp.Models.DashboardModel;
+import com.example.travelnepalapp.Models.PostModel;
 import com.example.travelnepalapp.R;
 
 import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder> {
     private Context context;
-    private List<DashboardModel> dashboardModelList;
+    private List<PostModel> postmodellist;
 
-    public DashboardAdapter(Context context, List<DashboardModel> dashboardModelList) {
+    public DashboardAdapter(Context context, List<PostModel> postmodellist) {
         this.context = context;
-        this.dashboardModelList = dashboardModelList;
+        this.postmodellist = postmodellist;
     }
 
     @NonNull
@@ -33,23 +33,26 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        DashboardModel dashboardModel = dashboardModelList.get(i);
-        viewHolder.tv_imagename.setText(dashboardModel.getPlacename());
+        PostModel postmodel = postmodellist.get(i);
+        viewHolder.tv_location.setText(postmodel.getLocation());
+        viewHolder.tv_title.setText(postmodel.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return dashboardModelList.size();
+        return postmodellist.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView iv_image;
-        private TextView tv_imagename;
+        private TextView tv_location;
+        private TextView tv_title;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_image = itemView.findViewById(R.id.iv_mainimage);
-            tv_imagename = itemView.findViewById(R.id.tv_placename);
+            tv_location = itemView.findViewById(R.id.tv_location);
+            tv_title=itemView.findViewById(R.id.tv_title);
 
         }
     }
