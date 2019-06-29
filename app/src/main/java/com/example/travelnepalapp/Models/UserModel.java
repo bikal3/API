@@ -7,6 +7,7 @@ public class UserModel {
     private String username;
     private String password;
     private String passwordConf;
+    private String image;
 
     public UserModel(String name, String email, String username, String password,String passwordConf) {
         this.name=name;
@@ -62,5 +63,21 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

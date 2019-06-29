@@ -6,7 +6,7 @@ public class PostModel {
     private String location;
     private String description;
     private String image;
-    private String username;
+    private String user;
 
     public String get_id() {
         return _id;
@@ -48,11 +48,11 @@ public class PostModel {
         this.image = image;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(String user) {
+        this.user = user;
     }
 }

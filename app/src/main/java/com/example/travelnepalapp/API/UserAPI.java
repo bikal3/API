@@ -30,8 +30,15 @@ public interface UserAPI {
     @POST("users/upload")
     Call<String> uploadImage(@Part MultipartBody.Part body);
 
-    @PUT("users/updateprofile")
-    Call<UserModel> updateprofle(@Body UserModel userModel);
+    @FormUrlEncoded
+    @PUT("users/userupdate")
+    Call<String> updateprofle(@Field("_id") String id,
+                                 @Field("token") String token,
+                                 @Field("username") String username,
+                                 @Field("name") String name,
+                                 @Field("image") String image,
+                                 @Field("email") String email
+                                 );
 
     @FormUrlEncoded
     @POST("users/profile")

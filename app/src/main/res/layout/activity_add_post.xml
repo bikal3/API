@@ -16,7 +16,7 @@
 
         android:layout_marginTop="80dp"
         android:hint="Select Image" />
-    //android:background="@drawable/flatbuttonboarder"
+
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv_post_img_"
@@ -24,6 +24,7 @@
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:background="@drawable/imageboarder"
         />
 
     <android.support.v7.widget.AppCompatButton

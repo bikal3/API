@@ -55,14 +55,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menuItem = findViewById(R.id.updateprofile);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
-        navanme =  findViewById(R.id.nav_name);
+        navanme = findViewById(R.id.nav_name);
         navemail = findViewById(R.id.nav_email);
         setSupportActionBar(toolbar);
         navigationView.setNavigationItemSelectedListener(this);
 
 
         recyclerAdapter = findViewById(R.id.rv_recyclerview);
-//        recyclerAdapter.setLayoutManager(new GridLayoutManager(this, 2));
         preferences = getSharedPreferences("localstorage", 0);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);

@@ -26,7 +26,7 @@ public interface PostAPI {
                         @Field("location")String location,
                         @Field("image") String image,
                         @Field("description") String description,
-                        @Field("username") String username,
+                        @Field("user") String user,
                         @Field("token") String token,
                         @Field("_id") String id
                         );
@@ -34,7 +34,7 @@ public interface PostAPI {
     @POST("users/postlist")
     Call<List<PostModel>>getpost(@Field("token")String token,
                                  @Field("username")String username,
-                                 @Field("_id")String id
+                                 @Field("_id")String _id
     );
 
 }

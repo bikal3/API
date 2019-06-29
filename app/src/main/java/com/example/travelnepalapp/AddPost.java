@@ -223,7 +223,7 @@ private void Opengallery() {
         SharedPreferences preferences=getSharedPreferences("localstorage",0);
         String token= preferences.getString("token",null);
         String id= preferences.getString("_id",null);
-        String user=preferences.getString("username",null);
+        String user=preferences.getString("_id",null);
 
         PostAPI postAPI=RetrofitHelper.instance().create(PostAPI.class);
         Call<String> postcall=postAPI.addpost(title,location,image,desc,user,token,id);
