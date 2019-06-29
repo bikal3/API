@@ -1,7 +1,7 @@
 package com.example.travelnepalapp.Feedback;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.travelnepalapp.R;
 

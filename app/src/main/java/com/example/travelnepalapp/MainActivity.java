@@ -17,9 +17,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.travelnepalapp.API.Feedback;
 import com.example.travelnepalapp.API.PostAPI;
 import com.example.travelnepalapp.Adapters.DashboardAdapter;
-import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.Models.DashboardModel;
 import com.example.travelnepalapp.Models.PostModel;
 import com.example.travelnepalapp.Post.AddPost;
@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent3 = new Intent(MainActivity.this, Feedback.class);
                 startActivity(intent3);
                 break;
-
         }
         return false;
     }
