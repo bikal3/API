@@ -16,12 +16,14 @@
     android:contentDescription="@string/my_image"
     />
 <TextView
+    android:id="@+id/nav_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/bikal_shrestha"
     android:paddingTop="8dp"
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
     <TextView
+        android:id="@+id/nav_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bikal3_bs_gmail_com"

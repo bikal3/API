@@ -30,6 +30,11 @@ public interface PostAPI {
                         @Field("token") String token,
                         @Field("_id") String id
                         );
-
+    @FormUrlEncoded
+    @POST("users/postlist")
+    Call<List<PostModel>>getpost(@Field("token")String token,
+                                 @Field("username")String username,
+                                 @Field("_id")String id
+    );
 
 }

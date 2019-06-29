@@ -1,6 +1,7 @@
 package com.example.travelnepalapp.Adapters;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +12,11 @@ import android.widget.TextView;
 
 import com.example.travelnepalapp.Models.PostModel;
 import com.example.travelnepalapp.R;
+import com.example.travelnepalapp.Retrofit.Url;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder> {
@@ -36,6 +41,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         PostModel postmodel = postmodellist.get(i);
         viewHolder.tv_location.setText(postmodel.getLocation());
         viewHolder.tv_title.setText(postmodel.getTitle());
+        StrictMode();
+        try {
+            String imgurl = Url.URL_image + postmodel.getImage();
+            URL url = new URL(imgurl);
+            viewHolder.iv_image.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
+//                    imagedash.setImageResource(BitmapFactory.decodeStream((InputStream)url.getContent()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -54,6 +69,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
             tv_location = itemView.findViewById(R.id.tv_location);
             tv_title=itemView.findViewById(R.id.tv_title);
 
+
         }
+    }
+    private void StrictMode() {
+        android.os.StrictMode.ThreadPolicy policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
+        android.os.StrictMode.setThreadPolicy(policy);
     }
 }
