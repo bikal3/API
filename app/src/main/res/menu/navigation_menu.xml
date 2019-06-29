@@ -9,9 +9,6 @@
          android:id="@+id/updateprofile"
          android:icon="@drawable/ic_perm_identity_black_24dp"></item>
         <item android:title="@string/add_post"
-         android:id="@+id/feedback"
-         android:icon="@drawable/post"></item>
-        <item android:title="@string/feedback"
          android:id="@+id/addpost"
          android:icon="@drawable/post"></item>
         <item android:title="@string/logout"
