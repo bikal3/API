@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.travelnepalapp.API.PostAPI;
 import com.example.travelnepalapp.Adapters.DashboardAdapter;
+import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.Models.DashboardModel;
 import com.example.travelnepalapp.Models.PostModel;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
@@ -122,6 +123,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.dashboard:
                 Intent intent2 = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent2);
+                break;
+                case R.id.feedback:
+                Intent intent3 = new Intent(MainActivity.this, Feedback.class);
+                startActivity(intent3);
                 break;
 
         }
