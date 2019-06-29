@@ -1,15 +1,12 @@
-package com.example.travelnepalapp;
+package com.example.travelnepalapp.Post;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.PostAPI;
+import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
 
 import java.io.ByteArrayOutputStream;

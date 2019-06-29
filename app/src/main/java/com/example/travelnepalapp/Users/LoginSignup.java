@@ -1,4 +1,4 @@
-package com.example.travelnepalapp;
+package com.example.travelnepalapp.Users;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.example.travelnepalapp.Adapters.LoginSignupAdapter;
 import com.example.travelnepalapp.Fragments.LoginFragment;
 import com.example.travelnepalapp.Fragments.SignupFragment;
+import com.example.travelnepalapp.R;
 
 public class LoginSignup extends AppCompatActivity {
     ViewPager viewPager;

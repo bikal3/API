@@ -14,15 +14,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.PostAPI;
 import com.example.travelnepalapp.Adapters.DashboardAdapter;
+import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.Models.DashboardModel;
 import com.example.travelnepalapp.Models.PostModel;
+import com.example.travelnepalapp.Post.AddPost;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
+import com.example.travelnepalapp.Users.UpdateProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +124,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.dashboard:
                 Intent intent2 = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent2);
+                break;
+                case R.id.feedback:
+                Intent intent3 = new Intent(MainActivity.this, Feedback.class);
+                startActivity(intent3);
                 break;
 
         }

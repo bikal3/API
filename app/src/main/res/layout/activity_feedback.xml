@@ -5,113 +5,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundgradient"
-    tools:context=".Post.AddPost">
+    tools:context=".Feedback.Feedback">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_post_selectimage"
-        style="@style/FlatButton"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_feedback"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-
-        android:layout_marginTop="80dp"
-        android:hint="Select Image" />
-
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/iv_post_img_"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/imageboarder"
-        />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_post_imageupload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="80dp"
-        android:layout_toRightOf="@id/iv_post_img_"
-        android:text="Upload Image"
-        android:background="@drawable/plainbutton"
-
-        />
+        android:layout_marginTop="50dp"
+        android:text="@string/feedback"
+        android:textAlignment="center"
+        android:textSize="30dp" />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_addpost"
+        android:id="@+id/til_fname"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_post_img_"
+        android:layout_below="@id/tv_feedback"
         android:layout_margin="20dp">
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_post_title"
+            android:id="@+id/et_feedback_fname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/post_title" />
+            android:hint="@string/first_name" />
     </android.support.design.widget.TextInputLayout>
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_location"
+        android:id="@+id/til_lname"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/til_addpost"
+        android:layout_below="@id/til_fname"
         android:layout_margin="20dp">
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_post_location"
+            android:id="@+id/et_feedback_lname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Add Location" />
+            android:hint="@string/last_name" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_postdesc"
+        android:id="@+id/til_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/til_imagename"
+        android:layout_below="@id/til_lname"
         android:layout_margin="20dp">
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_post_desc"
+            android:id="@+id/et_feedback_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Add Description"
-
-            />
+            android:hint="@string/email" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_imagename"
+        android:id="@+id/til_feedback"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/til_location"
+        android:layout_height="120dp"
+        android:layout_below="@id/til_email"
+
         android:layout_margin="20dp">
 
-
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_post_imagename"
+            android:id="@+id/et_feedback_feecback"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/til_postdesc"
-            android:hint="Image Name" />
+            android:layout_height="110dp"
+            android:hint="@string/feedback"
+            android:textAlignment="viewEnd"
+            android:gravity="end|bottom|left" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_post_addpost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/til_postdesc"
+        android:layout_below="@id/til_feedback"
         android:layout_margin="32dp"
         android:background="@drawable/buttonlayout"
         android:text="Add Post" />
+
+
 
 
 </RelativeLayout>

@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.travelnepalapp.Users.LoginSignup;
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override

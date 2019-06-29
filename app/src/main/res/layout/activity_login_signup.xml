@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginSignup"
+    tools:context=".Users.LoginSignup"
     android:id="@+id/rel_layout">
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="match_parent"

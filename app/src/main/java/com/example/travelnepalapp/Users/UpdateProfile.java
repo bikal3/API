@@ -1,16 +1,13 @@
-package com.example.travelnepalapp;
+package com.example.travelnepalapp.Users;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.session.MediaSession;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,12 +20,10 @@ import android.widget.Toast;
 
 import com.example.travelnepalapp.API.PostAPI;
 import com.example.travelnepalapp.API.UserAPI;
-import com.example.travelnepalapp.Models.Authtoken;
 import com.example.travelnepalapp.Models.UserModel;
+import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
 import com.example.travelnepalapp.Retrofit.Url;
-
-import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
