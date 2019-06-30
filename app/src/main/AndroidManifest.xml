@@ -21,6 +21,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".AddPost"></activity>
+        <activity android:name=".Feedback.Feedback"></activity>
         <activity android:name=".UpdateProfile" />
         <activity android:name=".LoginSignup" />
         <activity android:name=".MainActivity" />

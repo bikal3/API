@@ -81,13 +81,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_post_addpost"
+        android:id="@+id/btn_feedback_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/til_feedback"
         android:layout_margin="32dp"
         android:background="@drawable/buttonlayout"
-        android:text="Add Post" />
+        android:text="Submit" />
 
 
 
