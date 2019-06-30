@@ -15,6 +15,11 @@
         android:layout_height="wrap_content"
         android:visibility="invisible"
         />
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/hiddenimagename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_update_selectimage"
         style="@style/FlatButton"

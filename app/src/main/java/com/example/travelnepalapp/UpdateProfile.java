@@ -47,10 +47,11 @@ import retrofit2.Response;
 public class UpdateProfile extends AppCompatActivity implements View.OnClickListener {
 
     EditText fullname, email, user;
-    TextView updateimagename;
+    TextView updateimagename,hiddenimagename;
     Button btnupdate, btnselectimage, btnuploadimage;
     ImageView updateimage;
-    String imagenull;
+    String image;
+
 
     Context context;
 
@@ -73,6 +74,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         btnuploadimage = findViewById(R.id.btn_update_imageupload);
         updateimage = findViewById(R.id.iv_update_img);
         updateimagename = findViewById(R.id.et_update_imagename);
+        hiddenimagename=findViewById(R.id.hiddenimagename);
 
 
         btnupdate.setOnClickListener(this);
@@ -110,8 +112,11 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                 fullname.setText(response.body().getName());
                 email.setText(userModel.getEmail());
                 user.setText(userModel.getUsername());
+                hiddenimagename.setText(userModel.getImage());
+
                 StrictMode();
                 try {
+
                     String imgurl = Url.URL_image + userModel.getImage();
                     URL url = new URL(imgurl);
                     updateimage.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
@@ -120,7 +125,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                 }
 
 
-                Log.d("myTag", userModel.getName());
+
                 Log.d("ids", token);
 //
                 Toast.makeText(UpdateProfile.this, userModel.getId(), Toast.LENGTH_SHORT).show();
@@ -161,13 +166,18 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         String name = fullname.getText().toString();
         String emails = email.getText().toString();
         String username = user.getText().toString();
-        String image = updateimagename.getText().toString();
         SharedPreferences preferences = getSharedPreferences("localstorage", 0);
         String token = preferences.getString("token", null);
         String _id = preferences.getString("_id", null);
-        Log.d("userid", _id);
 
         UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
+        if(updateimagename == null){
+             image = hiddenimagename.getText().toString();
+        }else{
+            image = updateimagename.getText().toString();
+        }
+    Log.d("tag", hiddenimagename.getText().toString());
+
         Call<String> updateprofilecall = userAPI.updateprofle(_id, token, username, name, image, emails);
         updateprofilecall.enqueue(new Callback<String>() {
             @Override
