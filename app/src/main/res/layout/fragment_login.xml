@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroundgradient">
+     >
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,11 @@
                 android:hint="@string/email"
                 android:background="@drawable/edittextlayout"
                 android:inputType="text"
-                android:drawableLeft="@drawable/ic_email_black_24dp" />
+
+
+                android:drawableLeft="@drawable/ic_email_black_24dp"
+                android:drawablePadding = "20dp"
+                />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -58,10 +62,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_password"
+
                 android:hint="@string/password"
                 android:drawableStart="@drawable/ic_lock_black_24dp"
                 android:inputType="textPassword"
-                android:drawableLeft="@drawable/ic_lock_black_24dp" />
+                android:drawableLeft="@drawable/ic_lock_black_24dp"
+                android:drawablePadding = "20dp"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
@@ -73,6 +79,7 @@
             android:textColor="#FFFFFF"
             android:textSize="25dp"
             android:layout_centerHorizontal="true"
+
             android:text="@string/login"
             android:background="@drawable/buttonlayout"
             android:layout_below="@id/til_password"

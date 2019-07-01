@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface PostAPI {
 
@@ -22,19 +23,23 @@ public interface PostAPI {
 
     @FormUrlEncoded
     @POST("users/post")
-    Call<String>addpost(@Field("title") String title,
-                        @Field("location")String location,
-                        @Field("image") String image,
-                        @Field("description") String description,
-                        @Field("user") String user,
-                        @Field("token") String token,
-                        @Field("_id") String id
-                        );
+    Call<String> addpost(@Field("title") String title,
+                         @Field("location") String location,
+                         @Field("image") String image,
+                         @Field("description") String description,
+                         @Field("user") String user,
+                         @Field("token") String token,
+                         @Field("_id") String id
+    );
+
     @FormUrlEncoded
     @POST("users/postlist")
-    Call<List<PostModel>>getpost(@Field("token")String token,
-                                 @Field("username")String username,
-                                 @Field("_id")String _id
+    Call<List<PostModel>> getpost(@Field("token") String token,
+                                  @Field("username") String username,
+                                  @Field("_id") String _id
     );
+
+    @POST("postDetial/{id}")
+    Call<PostModel> getpostid(@Path("id")String id);
 
 }

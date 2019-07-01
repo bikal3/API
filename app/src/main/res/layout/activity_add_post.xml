@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundgradient"
-    tools:context=".AddPost">
+    tools:context=".Post.AddPost">
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_post_selectimage"

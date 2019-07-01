@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdateProfile">
+    tools:context=".Users.UpdateProfile">
 
 
 
@@ -20,36 +20,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_update_selectimage"
         style="@style/FlatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-
-        android:layout_marginTop="80dp"
+        android:layout_below="@+id/iv_update_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:hint="Select Image" />
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv_update_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@drawable/imageboarder"
         />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_update_imageupload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="80dp"
-        android:layout_toRightOf="@id/iv_update_img"
-        android:text="Upload Image"
-        android:background="@drawable/plainbutton"
-
-        />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_fullname"
@@ -59,7 +50,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:layout_below="@id/iv_update_img">
+        android:layout_below="@id/btn_update_selectimage">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/et_fullname_update"
@@ -119,6 +110,7 @@
         android:layout_below="@id/til_username"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="50dp"
+        android:padding="15dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/buttonlayout"
         android:text="@string/update"

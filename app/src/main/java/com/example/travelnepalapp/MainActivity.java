@@ -8,22 +8,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.API.PostAPI;
 import com.example.travelnepalapp.Adapters.DashboardAdapter;
-import com.example.travelnepalapp.Feedback.Feedback;
-import com.example.travelnepalapp.Models.DashboardModel;
 import com.example.travelnepalapp.Models.PostModel;
+import com.example.travelnepalapp.Post.AddPost;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
+import com.example.travelnepalapp.Users.UpdateProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String data = "";
 
     private RecyclerView recyclerAdapter;
-    private List<DashboardModel> dashboardModels = new ArrayList<>();
 
 
     @Override
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 List<PostModel> list = response.body();
                 Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
                 recyclerAdapter.setAdapter(new DashboardAdapter(MainActivity.this, list));
-                recyclerAdapter.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                recyclerAdapter.setLayoutManager(new GridLayoutManager(MainActivity.this,2));
 
 
             }

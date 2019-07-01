@@ -1,6 +1,7 @@
 package com.example.travelnepalapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.travelnepalapp.Models.PostModel;
+import com.example.travelnepalapp.Post.PostDashboard;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.Url;
 
@@ -38,7 +40,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        PostModel postmodel = postmodellist.get(i);
+        final PostModel postmodel = postmodellist.get(i);
         viewHolder.tv_location.setText(postmodel.getLocation());
         viewHolder.tv_title.setText(postmodel.getTitle());
         StrictMode();
@@ -50,6 +52,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         } catch (IOException e) {
             e.printStackTrace();
         }
+        viewHolder.iv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(context, PostDashboard.class);
+                intent.putExtra("post_id",postmodel.get_id());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
