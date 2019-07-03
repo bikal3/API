@@ -2,6 +2,7 @@ package com.example.travelnepalapp.Feedback;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     EditText fname, lname, email, message;
     Button btnfeedback;
+    Toolbar toolbars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         lname = findViewById(R.id.et_feedback_lname);
         email = findViewById(R.id.et_feedback_email);
         message = findViewById(R.id.et_feedback_feecback);
+        toolbars = findViewById(R.id.toolbarss);
+
+        setSupportActionBar(toolbars);
+        getSupportActionBar().setTitle("TravelNepal App");
 
         btnfeedback = findViewById(R.id.btn_feedback_add);
 
@@ -47,14 +53,14 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void addfeedback() {
-        String ffname=fname.getText().toString();
-        String llname=lname.getText().toString();
-        String emails=email.getText().toString();
-        String messages=message.getText().toString();
+        String ffname = fname.getText().toString();
+        String llname = lname.getText().toString();
+        String emails = email.getText().toString();
+        String messages = message.getText().toString();
 
 
-        FeedbackAPI feedbackAPI= RetrofitHelper.instance().create(FeedbackAPI.class);
-        Call<String> feedbackcall=feedbackAPI.addpost(ffname,llname,emails,messages);
+        FeedbackAPI feedbackAPI = RetrofitHelper.instance().create(FeedbackAPI.class);
+        Call<String> feedbackcall = feedbackAPI.addpost(ffname, llname, emails, messages);
         feedbackcall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -63,7 +69,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(Feedback.this, "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Feedback.this, "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

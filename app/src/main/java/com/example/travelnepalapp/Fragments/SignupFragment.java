@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,6 +97,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
+                    TabLayout tabs = (TabLayout) getActivity().findViewById(R.id.tablayout);
+                    tabs.getTabAt(1).select();
                     return;
                 }
                 String res = response.body();
@@ -106,7 +109,6 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Toast.makeText(getActivity(), "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
     }

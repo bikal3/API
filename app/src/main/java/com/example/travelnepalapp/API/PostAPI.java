@@ -1,6 +1,7 @@
 package com.example.travelnepalapp.API;
 
 import com.example.travelnepalapp.Models.PostModel;
+import com.example.travelnepalapp.Models.UserModel;
 
 import java.util.List;
 
@@ -39,7 +40,10 @@ public interface PostAPI {
                                   @Field("_id") String _id
     );
 
-    @POST("postDetial/{id}")
-    Call<PostModel> getpostid(@Path("id")String id);
+    @POST("postbyid/{id}")
+    Call<PostModel> getpostdetail(@Path("id")String id);
+
+    @POST("userbyid/{id}")
+    Call<UserModel> getuserdetial(@Path("id")String id);
 
 }

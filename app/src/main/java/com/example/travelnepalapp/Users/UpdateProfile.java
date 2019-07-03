@@ -73,7 +73,6 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
 
 
         btnupdate.setOnClickListener(this);
-        btnuploadimage.setOnClickListener(this);
         btnselectimage.setOnClickListener(this);
 //        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 

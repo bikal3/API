@@ -57,6 +57,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
             public void onClick(View v) {
                 Intent intent= new Intent(context, PostDashboard.class);
                 intent.putExtra("post_id",postmodel.get_id());
+                intent.putExtra("user_id",postmodel.getUser());
                 context.startActivity(intent);
             }
         });

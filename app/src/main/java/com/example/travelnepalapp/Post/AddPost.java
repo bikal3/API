@@ -230,10 +230,7 @@ private void Opengallery() {
             public void onResponse(Call<String> call, Response<String> response) {
                 Toast.makeText(context, "Post Added", Toast.LENGTH_SHORT).show();
 //                reset();
-
-
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Toast.makeText(context, "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();

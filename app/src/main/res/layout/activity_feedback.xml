@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundgradient"
-    tools:context=".Feedback.Feedback">
 
+    tools:context=".Feedback.Feedback">
+<include layout="@layout/toolbarlayout"></include>
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_feedback"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:text="@string/feedback"
         android:textAlignment="center"
         android:textSize="30dp" />

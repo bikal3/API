@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +25,7 @@ import com.example.travelnepalapp.Adapters.DashboardAdapter;
 import com.example.travelnepalapp.Models.PostModel;
 import com.example.travelnepalapp.Post.AddPost;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
+import com.example.travelnepalapp.Users.LoginSignup;
 import com.example.travelnepalapp.Users.UpdateProfile;
 
 import java.util.ArrayList;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navanme = findViewById(R.id.nav_name);
         navemail = findViewById(R.id.nav_email);
         setSupportActionBar(toolbar);
+         getSupportActionBar().setTitle("TravelNepal App");
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -90,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 List<PostModel> list = response.body();
                 Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
                 recyclerAdapter.setAdapter(new DashboardAdapter(MainActivity.this, list));
-                recyclerAdapter.setLayoutManager(new GridLayoutManager(MainActivity.this,2));
+                recyclerAdapter.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
 
             }
@@ -124,11 +127,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent2 = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent2);
                 break;
-                case R.id.feedback:
+            case R.id.feedback:
                 Intent intent3 = new Intent(MainActivity.this, Feedback.class);
                 startActivity(intent3);
                 break;
+            case R.id.logout:
+                SharedPreferences preferences=getSharedPreferences("localstorage",0);
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.remove("token");
+                editor.remove("username");
+                editor.remove("_id");
+                editor.remove("email");
+                editor.remove("password");
+                editor.commit();
 
+                Intent intent4 = new Intent(MainActivity.this, LoginSignup.class);
+                startActivity(intent4);
+                break;
         }
         return false;
     }
