@@ -8,10 +8,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,14 +42,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class UpdateProfile extends AppCompatActivity implements View.OnClickListener {
 
     EditText fullname, email, user;
     TextView updateimagename,hiddenimagename;
-    Button btnupdate, btnselectimage, btnuploadimage;
+    Button btnupdate, btnselectimage;
     ImageView updateimage;
     String image;
-
 
     Context context;
 
@@ -69,18 +73,34 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
 
         updateimage = findViewById(R.id.iv_update_img);
         updateimagename = findViewById(R.id.et_update_imagename);
-        hiddenimagename=findViewById(R.id.hiddenimagename);
+
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.activity_update_profile, container, false);
+//        super.onCreate(savedInstanceState);
+////        setContentView(R.layout.activity_update_profile);
+//
+//
+//        fullname = view.findViewById(R.id.et_fullname_update);
+//        email = view.findViewById(R.id.et_email_update);
+//        user = view.findViewById(R.id.et_username_update);
+//        btnupdate = view.findViewById(R.id.btn_update);
+//        btnselectimage = view.findViewById(R.id.btn_update_selectimage);
+//
+//        updateimage = view.findViewById(R.id.iv_update_img);
+//        updateimagename = view.findViewById(R.id.et_update_imagename);
+//        hiddenimagename=view.findViewById(R.id.hiddenimagename);
 
 
         btnupdate.setOnClickListener(this);
         btnselectimage.setOnClickListener(this);
-//        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 
         Load();
 //        if(updateimagename==null || updateimagename.equals("")){
 //            updateimagename.setText("");
 //        }
 //
+//        return view;
 
     }
 
@@ -102,11 +122,11 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 UserModel userModel = response.body();
+
 //
                 fullname.setText(response.body().getName());
                 email.setText(userModel.getEmail());
                 user.setText(userModel.getUsername());
-                hiddenimagename.setText(userModel.getImage());
 
                 StrictMode();
                 try {
@@ -120,16 +140,11 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
 
 
 
-                Log.d("ids", token);
-//
-                Toast.makeText(UpdateProfile.this, userModel.getId(), Toast.LENGTH_SHORT).show();
-
-
             }
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Toast.makeText(UpdateProfile.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -157,36 +172,56 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         String name = fullname.getText().toString();
         String emails = email.getText().toString();
         String username = user.getText().toString();
+        image = updateimagename.getText().toString();
         SharedPreferences preferences = getSharedPreferences("localstorage", 0);
         String token = preferences.getString("token", null);
         String _id = preferences.getString("_id", null);
 
         UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
-        if(updateimagename == null){
-             image = hiddenimagename.getText().toString();
-        }else{
-            image = updateimagename.getText().toString();
-        }
-    Log.d("tag", hiddenimagename.getText().toString());
+        if(image == null || image.equals("")){
 
-        Call<String> updateprofilecall = userAPI.updateprofle(_id, token, username, name, image, emails);
-        updateprofilecall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(UpdateProfile.this, "Failed", Toast.LENGTH_SHORT).show();
-                    return;
+            Call<String> updateprofilecall = userAPI.updateproflewithoutimage(_id, token, username, name, emails);
+            updateprofilecall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(UpdateProfile.this, "Failed", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Toast.makeText(UpdateProfile.this, "Sucessfull", Toast.LENGTH_SHORT).show();
                 }
 
-                Toast.makeText(UpdateProfile.this, "Sucessfull", Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(UpdateProfile.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(context, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
 
-            }
-        });
+        }else{
+
+            Call<String> updateprofilecall = userAPI.updateprofle(_id, token, username, name, image, emails);
+            updateprofilecall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Toast.makeText(UpdateProfile.this, "Sucessfull", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(context, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+        }
+
 
     }
 
@@ -199,7 +234,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
             imageUri = data.getData();
@@ -219,7 +254,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         byte[] bytes = stream.toByteArray();
         try {
 
-            File file = new File(this.getCacheDir(), "image.jpeg");
+            File file = new File(getCacheDir(), "image.jpeg");
             file.createNewFile();
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(bytes);

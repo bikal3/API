@@ -42,6 +42,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     Button signup, login;
     EditText email, password;
     Boolean isloggedin;
+    SharedPreferences.Editor editor;
+    SharedPreferences preferences;
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" + //at least 1 digit
@@ -71,6 +73,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         login.setOnClickListener(this);
         signup.setOnClickListener(this);
+         preferences = getActivity().getSharedPreferences("localstorage", 0);
+        editor = preferences.edit();
         return view;
 
     }
@@ -156,8 +160,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    SharedPreferences preferences = getActivity().getSharedPreferences("localstorage", 0);
-                    SharedPreferences.Editor editor = preferences.edit();
+
 
                     editor.putString("username", token.getUsername());
                     editor.putString("token", token.getToken());

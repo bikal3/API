@@ -1,9 +1,13 @@
 package com.example.travelnepalapp;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,21 +17,31 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.accessibility.AccessibilityManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.travelnepalapp.API.UserAPI;
 import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.API.PostAPI;
 import com.example.travelnepalapp.Adapters.DashboardAdapter;
+import com.example.travelnepalapp.Fragments.SignupFragment;
 import com.example.travelnepalapp.Models.PostModel;
+import com.example.travelnepalapp.Models.UserModel;
 import com.example.travelnepalapp.Post.AddPost;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
+import com.example.travelnepalapp.Retrofit.Url;
 import com.example.travelnepalapp.Users.LoginSignup;
 import com.example.travelnepalapp.Users.UpdateProfile;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences preferences;
 
     TextView navanme, navemail;
+    ImageView navimage;
     private String data = "";
 
     private RecyclerView recyclerAdapter;
@@ -58,8 +73,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menuItem = findViewById(R.id.updateprofile);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
-        navanme = findViewById(R.id.nav_name);
-        navemail = findViewById(R.id.nav_email);
+        navanme = navigationView.getHeaderView(0).findViewById(R.id.nav_name);
+        navimage = navigationView.getHeaderView(0).findViewById(R.id.navimage);
+        navemail = navigationView.getHeaderView(0).findViewById(R.id.nav_email);
         setSupportActionBar(toolbar);
          getSupportActionBar().setTitle("TravelNepal App");
         navigationView.setNavigationItemSelectedListener(this);
@@ -71,10 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
-//        navemail.setText(preferences.getString("username", null));
-//        navanme.setText(preferences.getString("_id", null));
 
         init();
+        navheadear();
     }
 
     private void init() {
@@ -107,15 +122,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+    private void StrictMode() {
+        android.os.StrictMode.ThreadPolicy policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
+        android.os.StrictMode.setThreadPolicy(policy);
+    }
+    private void navheadear(){
+        UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
+        SharedPreferences preferences = getSharedPreferences("localstorage", 0);
+        String id = preferences.getString("_id", null);
+        final String token = preferences.getString("token", null);
+        String username = preferences.getString("username", null);
+
+        Call<UserModel> userModelCall = userAPI.loadprofile(id, token, username);
+
+        userModelCall.enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                UserModel userModel = response.body();
+//
+                navanme.setText(response.body().getName());
+                navemail.setText(response.body().getEmail());
+
+                StrictMode();
+                try {
+
+                    String imgurl = Url.URL_image + userModel.getImage();
+                    URL url = new URL(imgurl);
+                    navimage.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
+        Fragment fragment = null;
+        Class fragmentClass = null;
 
         switch (id) {
             case R.id.updateprofile:
                 Intent intent = new Intent(MainActivity.this, UpdateProfile.class);
                 startActivity(intent);
+
+
+//                UpdateProfile updateProfile = new UpdateProfile();
+//                FragmentManager manager = getFragmentManager();
+//                FragmentTransaction transaction = manager.beginTransaction();
+//                transaction.replace(R.id.fragment_signup, new LoginSignup());
+//                transaction.add(R.id.updateprofile, UpdateProfile());
+//                transaction.commit();
+//                android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_signup, new SignupFragment());
+//                fragmentTransaction.commit();
                 break;
 
             case R.id.addpost:
@@ -139,10 +206,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 editor.remove("_id");
                 editor.remove("email");
                 editor.remove("password");
+                editor.putBoolean("loginchecker",false);
                 editor.commit();
 
                 Intent intent4 = new Intent(MainActivity.this, LoginSignup.class);
                 startActivity(intent4);
+                finish();
                 break;
         }
         return false;

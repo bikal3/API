@@ -39,6 +39,15 @@ public interface UserAPI {
                                  @Field("image") String image,
                                  @Field("email") String email
                                  );
+    @FormUrlEncoded
+    @PUT("users/userupdate")
+    Call<String> updateproflewithoutimage(@Field("_id") String id,
+                              @Field("token") String token,
+                              @Field("username") String username,
+                              @Field("name") String name,
+                              @Field("email") String email
+    );
+
 
     @FormUrlEncoded
     @POST("users/profile")
