@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Post.PostDashboard"></activity>
+        <activity android:name=".Comment.AddComment"
+            android:theme="@style/AppTheme.Popup"></activity>
+        <activity android:name=".Post.PostDashboard" />
         <activity android:name=".Feedback.Feedback" />
         <activity android:name=".Post.AddPost" />
         <activity android:name=".Users.UpdateProfile" />

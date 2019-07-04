@@ -121,5 +121,14 @@
 
 
     </android.support.v7.widget.CardView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_post_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/comments"
+        android:layout_margin="16dp"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

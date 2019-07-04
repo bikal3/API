@@ -91,6 +91,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         init();
         navheadear();
     }
+    protected void onResume() {
+        super.onResume();
+        if(recyclerAdapter != null) {
+            init();
+            navheadear();
+        }
+    }
 
     private void init() {
 
