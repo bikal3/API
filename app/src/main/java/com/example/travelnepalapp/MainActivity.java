@@ -112,7 +112,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pListCall.enqueue(new Callback<List<PostModel>>() {
             @Override
             public void onResponse(Call<List<PostModel>> call, Response<List<PostModel>> response) {
-                List<PostModel> list = response.body();
+//                List<PostModel> list = response.body();
+                List<PostModel> list= response.body();
                 Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
                 recyclerAdapter.setAdapter(new DashboardAdapter(MainActivity.this, list));
                 recyclerAdapter.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));

@@ -166,7 +166,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     editor.putString("token", token.getToken());
                     editor.putString("_id", token.getId());
                     editor.putString("email", emails);
-                    editor.putString("password", pass);
+//                    editor.putString("password", pass);
                     isloggedin=true;
                     editor.putBoolean("loginchecker",isloggedin);
 

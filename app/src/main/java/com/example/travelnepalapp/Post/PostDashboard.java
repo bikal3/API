@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +33,8 @@ public class PostDashboard extends AppCompatActivity implements View.OnClickList
     TextView posttitle, postlocation, postdesc, postusername;
     ImageView postimageview, postuserimage;
     FloatingActionButton btncomment;
+    String post_id;
+    String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class PostDashboard extends AppCompatActivity implements View.OnClickList
                 posttitle.setText(response.body().getTitle());
                 postdesc.setText(response.body().getDescription());
                 postlocation.setText(response.body().getLocation());
+                post_id= response.body().get_id();
                 StrictMode();
                 try {
                     String imgurl = Url.URL_image + response.body().getImage();
@@ -92,7 +96,7 @@ public class PostDashboard extends AppCompatActivity implements View.OnClickList
 
     private void postuserdata() {
         final PostAPI postAPI = RetrofitHelper.instance().create(PostAPI.class);
-        String userid = getIntent().getStringExtra("user_id");
+        userid = getIntent().getStringExtra("user_id");
         Call<UserModel> userModelCall = postAPI.getuserdetial(userid);
         userModelCall.enqueue(new Callback<UserModel>() {
             @Override
@@ -122,7 +126,11 @@ public class PostDashboard extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_post_comment:
+
                 Intent intent= new Intent(this, AddComment.class);
+                intent.putExtra("post_id",post_id);
+                intent.putExtra("user_id",userid);
+                Log.d("postid",post_id);
                 startActivity(intent);
 
                 break;
