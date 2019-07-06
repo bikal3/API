@@ -54,11 +54,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             String imgurl = Url.URL_image + commentModel.getUser().getImage();
             URL url = new URL(imgurl);
             viewHolder.userimage.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
-//                    imagedash.setImageResource(BitmapFactory.decodeStream((InputStream)url.getContent()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        Log.d("username",commentModel.getUser().getUsername());
     }
 
     @Override
