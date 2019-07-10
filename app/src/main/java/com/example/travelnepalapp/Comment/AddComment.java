@@ -1,6 +1,9 @@
 package com.example.travelnepalapp.Comment;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.icu.text.UnicodeSetSpanner;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,13 +20,13 @@ import android.widget.Toast;
 
 import com.example.travelnepalapp.API.CommentAPI;
 import com.example.travelnepalapp.Adapters.CommentAdapter;
+import com.example.travelnepalapp.BusinessLogic.Commentquery;
+import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.Models.CommentModel;
 import com.example.travelnepalapp.Models.UserModel;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
-import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
+import com.example.travelnepalapp.StrictMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +69,6 @@ public class AddComment extends AppCompatActivity implements View.OnClickListene
     private void init() {
         final CommentAPI commentAPI = RetrofitHelper.instance().create(CommentAPI.class);
         final String id = getIntent().getStringExtra("post_id");
-
-
         Call<List<CommentModel>> listCall = commentAPI.getallcomment(id);
         listCall.enqueue(new Callback<List<CommentModel>>() {
             @Override
@@ -126,7 +127,6 @@ public class AddComment extends AppCompatActivity implements View.OnClickListene
     }
 
     private void addcomment() {
-        CommentAPI commentAPI=RetrofitHelper.instance().create(CommentAPI.class);
         final String postid = getIntent().getStringExtra("post_id");
         String comment= etcomment.getText().toString();
         SharedPreferences preferences=getSharedPreferences("localstorage",0);
@@ -134,19 +134,42 @@ public class AddComment extends AppCompatActivity implements View.OnClickListene
         final String token=preferences.getString("token",null);
         final String id=preferences.getString("_id",null);
 
-        Call<String> commentadd=commentAPI.addcomment(postid,comment,user,token,id);
-        commentadd.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-//                        Log.d("comment",response.body());
-                Toast.makeText(AddComment.this, "Successfull added", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(AddComment.this, "Eroor"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        Commentquery commentquery=new Commentquery();
+        StrictMode.StrictMode();
+        if(commentquery.addcomment(postid,comment,user,token,id)==false){
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            Vibrator vibe = (Vibrator) AddComment.this.getSystemService(Context.VIBRATOR_SERVICE);
+            vibe.vibrate(100);
+        }
+        else {
+            Toast.makeText(this, "Added Comment", Toast.LENGTH_SHORT).show();
+            etcomment.setText("");
+            
+        }
     }
+
+//    private void addcomment() {
+//        CommentAPI commentAPI=RetrofitHelper.instance().create(CommentAPI.class);
+//        final String postid = getIntent().getStringExtra("post_id");
+//        String comment= etcomment.getText().toString();
+//        SharedPreferences preferences=getSharedPreferences("localstorage",0);
+//        final String user=preferences.getString("_id",null);
+//        final String token=preferences.getString("token",null);
+//        final String id=preferences.getString("_id",null);
+//
+//        Call<String> commentadd=commentAPI.addcomment(postid,comment,user,token,id);
+//        commentadd.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+////                        Log.d("comment",response.body());
+//                Toast.makeText(AddComment.this, "Successfull added", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(AddComment.this, "Eroor"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//    }
 }

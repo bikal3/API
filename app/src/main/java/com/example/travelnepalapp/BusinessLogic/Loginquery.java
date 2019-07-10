@@ -14,29 +14,26 @@ import retrofit2.Response;
 public class Loginquery {
     String email;
     String password;
-    boolean isloggedin = false;
-    Authtoken authtoken;
-    String success;
+    public static String token;
+    public static String username;
+    public static String _id;
+    public static Authtoken authtoken;
 
-    public Loginquery(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public Authtoken checkUser() {
+    public boolean checkUser(String email,String password) {
+        boolean isloggedin = false;
         UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
         Call<Authtoken> usercall = userAPI.login(email, password);
         try {
             Response<Authtoken> loginresponse = usercall.execute();
-            authtoken = loginresponse.body();
-            success=authtoken.getSuccess();
-
-            Log.d("authstoken",authtoken.getSuccess());
-
+            if (!loginresponse.body().getSuccess().isEmpty()) {
+                token = loginresponse.body().getToken();
+                username=loginresponse.body().getUsername();
+                _id=loginresponse.body().get_id();
+                isloggedin = true;
+            }
         } catch (IOException e) {
             e.printStackTrace();
-
         }
-        return authtoken;
+        return isloggedin;
     }
 }

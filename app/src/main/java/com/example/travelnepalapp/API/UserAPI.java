@@ -19,7 +19,7 @@ import retrofit2.http.Path;
 public interface UserAPI {
 
     @POST("users/registration")
-    Call<String> addUser(@Body UserModel userModel);
+    Call<Void> addUser(@Body UserModel userModel);
 
     @FormUrlEncoded
     @POST("users/login")

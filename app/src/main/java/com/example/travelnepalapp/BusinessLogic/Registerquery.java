@@ -15,24 +15,27 @@ public class Registerquery {
     String success;
 
     UserModel userModel;
-    public Registerquery(UserModel userModel){
-
-        this.userModel=userModel;
-    }
-    public String register(){
+//    public Registerquery(UserModel userModel){
+//
+//        this.userModel=userModel;
+//    }
+    public Boolean register(UserModel userModel){
+        Boolean a=false;
         UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
-        Call<String> registercall=userAPI.addUser(userModel);
+        Call<Void> registercall=userAPI.addUser(userModel);
         try{
 
-            Response<String> registerres=registercall.execute();
-            success=registerres.body();
-            Log.d("authstoken",success);
+            Response<Void> registerres=registercall.execute();
+            if(registerres.isSuccessful()){
+                a=true;
+            }
+
 
         }catch (IOException e) {
             e.printStackTrace();
 
         }
-        return success;
+        return a;
     }
 
 

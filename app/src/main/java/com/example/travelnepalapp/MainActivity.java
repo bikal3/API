@@ -2,9 +2,14 @@ package com.example.travelnepalapp;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -21,6 +26,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,10 +61,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     MenuItem menuItem;
     SharedPreferences preferences;
+    TextView ProximitySensor, data;
+
+    SensorManager mySensorManager;
+    Sensor myProximitySensor;
 
     TextView navanme, navemail;
     ImageView navimage;
-    private String data = "";
 
     private RecyclerView recyclerAdapter;
 
@@ -76,6 +85,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navanme = navigationView.getHeaderView(0).findViewById(R.id.nav_name);
         navimage = navigationView.getHeaderView(0).findViewById(R.id.navimage);
         navemail = navigationView.getHeaderView(0).findViewById(R.id.nav_email);
+        ProximitySensor=findViewById(R.id.proximityvalue);
+
+        mySensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        myProximitySensor = mySensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        if (myProximitySensor == null) {
+            ProximitySensor.setText("No Proximity Sensor!");
+        } else {
+            mySensorManager.registerListener(sensorEventListener, myProximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+
+//        mySensorManager.registerListener(sensorEventListener, myProximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+
+
+
         setSupportActionBar(toolbar);
          getSupportActionBar().setTitle("TravelNepal App");
         navigationView.setNavigationItemSelectedListener(this);
@@ -91,6 +115,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         init();
         navheadear();
     }
+    SensorEventListener sensorEventListener=new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            WindowManager.LayoutParams params = MainActivity.this.getWindow().getAttributes();
+            if(event.sensor.getType()==Sensor.TYPE_PROXIMITY){
+
+                if(event.values[0]==0){
+                    params.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+                    params.screenBrightness = 0;
+                    getWindow().setAttributes(params);
+                }
+                else{
+                    params.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+                    params.screenBrightness = -1f;
+                    getWindow().setAttributes(params);
+                }
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
     protected void onResume() {
         super.onResume();
         if(recyclerAdapter != null) {

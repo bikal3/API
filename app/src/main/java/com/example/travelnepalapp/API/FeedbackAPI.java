@@ -11,7 +11,7 @@ public interface FeedbackAPI {
 
     @FormUrlEncoded
     @POST("contact")
-    Call<String> addpost(@Field("fname") String fname,
+    Call<Void> addfeedback(@Field("fname") String fname,
                          @Field("lname")String lname,
                          @Field("email") String email,
                          @Field("message") String message

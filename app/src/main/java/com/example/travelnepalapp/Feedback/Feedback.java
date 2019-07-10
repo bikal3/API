@@ -1,6 +1,8 @@
 package com.example.travelnepalapp.Feedback;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -9,9 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.FeedbackAPI;
+import com.example.travelnepalapp.BusinessLogic.Feedbackquery;
 import com.example.travelnepalapp.Notification;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
+import com.example.travelnepalapp.StrictMode;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,26 +62,49 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         String llname = lname.getText().toString();
         String emails = email.getText().toString();
         String messages = message.getText().toString();
+        Feedbackquery feedbackquery= new Feedbackquery();
+        StrictMode.StrictMode();
+        if(feedbackquery.addfeedback(ffname,llname,emails,messages)==false){
+            Toast.makeText(Feedback.this, "Error", Toast.LENGTH_SHORT).show();
+            Vibrator vibe = (Vibrator) Feedback.this.getSystemService(Context.VIBRATOR_SERVICE);
+            vibe.vibrate(100);
+        }
 
-
-        FeedbackAPI feedbackAPI = RetrofitHelper.instance().create(FeedbackAPI.class);
-        Call<String> feedbackcall = feedbackAPI.addpost(ffname, llname, emails, messages);
-        feedbackcall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(Feedback.this, "Successfully Added", Toast.LENGTH_SHORT).show();
-                Notification.givenotification(Feedback.this,"You have send your feedback");
+        else {
+            Toast.makeText(Feedback.this, "Successfully Added", Toast.LENGTH_SHORT).show();
+                Notification.givenotification(Feedback.this,"Thank you for you Feedback");
                 resetAllField();
-            }
+        }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(Feedback.this, "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
-            }
-        });
 
     }
+
+    //    private void addfeedback() {
+//        String ffname = fname.getText().toString();
+//        String llname = lname.getText().toString();
+//        String emails = email.getText().toString();
+//        String messages = message.getText().toString();
+//
+//
+//        FeedbackAPI feedbackAPI = RetrofitHelper.instance().create(FeedbackAPI.class);
+//        Call<String> feedbackcall = feedbackAPI.addfeedback(ffname, llname, emails, messages);
+//        feedbackcall.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                Toast.makeText(Feedback.this, "Successfully Added", Toast.LENGTH_SHORT).show();
+//                Notification.givenotification(Feedback.this,"You have send your feedback");
+//                resetAllField();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(Feedback.this, "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//    }
     private void resetAllField() {
         fname.setText("");
         lname.setText("");

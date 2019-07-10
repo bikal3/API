@@ -90,23 +90,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_login:
 //                checkUser();
                 if (loginvalidation()) {
-                    final String emails = email.getText().toString();
-                    final String pass = password.getText().toString();
-                    Loginquery login = new Loginquery(emails, pass);
+                    String emails = email.getText().toString();
+                    String pass = password.getText().toString();
+                    Loginquery login = new Loginquery();
                     StrictMode();
-                    authtoken = login.checkUser();
-                    Toast.makeText(getContext(), authtoken.getSuccess(), Toast.LENGTH_SHORT).show();
-
-                    if (authtoken.getSuccess().equals("Success!")) {
-                        editor.putString("username", authtoken.getUsername());
-                    editor.putString("token", authtoken.getToken());
-                    editor.putString("_id", authtoken.getId());
-                    editor.putString("email", emails);
-                    isloggedin=true;
-                    editor.putBoolean("loginchecker",isloggedin);
-
-
-                    editor.commit();
+                    if (login.checkUser(emails,pass)) {
+                        editor.putString("username", Loginquery.username);
+                        editor.putString("token", Loginquery.token);
+                        editor.putString("_id", Loginquery._id);
+                        editor.putString("email", emails);
+                        isloggedin=true;
+                        editor.putBoolean("loginchecker",isloggedin);
+                        editor.commit();
 
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
@@ -118,6 +113,28 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     }
 //                }
                 }
+
+//                    if (login.checkUser(emails,pass)) {
+//                        editor.putString("username", authtoken.getUsername());
+//                    editor.putString("token", authtoken.getToken());
+//                    editor.putString("_id", authtoken.getId());
+//                    editor.putString("email", emails);
+//                    isloggedin=true;
+//                    editor.putBoolean("loginchecker",isloggedin);
+//
+//
+//                    editor.commit();
+//
+//                        Intent intent = new Intent(getActivity(), MainActivity.class);
+//                        startActivity(intent);
+//                    } else {
+//                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+//                        Vibrator vibrator=(Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+//                        vibrator.vibrate(100);
+//
+//                    }
+////                }
+//                }
                 break;
             case R.id.btn_signup:
                 TabLayout tabs = (TabLayout) getActivity().findViewById(R.id.tablayout);

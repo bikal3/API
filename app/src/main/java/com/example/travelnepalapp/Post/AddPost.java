@@ -237,17 +237,18 @@ public void onActivityResult(int requestCode, int resultCode, @Nullable Intent d
             @Override
             public void onResponse(Call<Success> call, Response<Success> response) {
                 Success success=response.body();
-                if(success.getSuccess().equals("'Post successfully Placed!!!")){
-                    Toast.makeText(context, "Added Post", Toast.LENGTH_SHORT).show();
+                if(!response.isSuccessful()){
+                    Toast.makeText(AddPost.this, response.code(), Toast.LENGTH_SHORT).show();
 
 //                reset();
                 }
-                Toast.makeText(context, "Added Post", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddPost.this, "Added Post", Toast.LENGTH_SHORT).show();
+               reset();
 
             }
             @Override
             public void onFailure(Call<Success> call, Throwable t) {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddPost.this, "Error", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -261,6 +262,7 @@ private void reset(){
         adddesc.setText("");
         addlocation.setText("");
         imagename.setText("");
+
 }
 
 

@@ -23,7 +23,7 @@ public interface CommentAPI {
 
     @FormUrlEncoded
     @POST("users/comment")
-    Call<String> addcomment(@Field("post_id") String post_id,
+    Call<Void> addcomment(@Field("post_id") String post_id,
                             @Field("comment") String comment,
                             @Field("user") String userid,
                             @Field("token") String token,

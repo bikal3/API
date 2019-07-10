@@ -96,9 +96,9 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         String passs = passwordds.getText().toString();
 
         UserModel userModel = new UserModel(fullname, emails, user, pass, passs);
-        Registerquery registerquery= new Registerquery(userModel);
+        Registerquery registerquery= new Registerquery();
         StrictMode();
-        if(registerquery.register().isEmpty()){
+        if(registerquery.register(userModel)==false){
             Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             Vibrator vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
             vibe.vibrate(100);
