@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundgradient"
     tools:context=".Post.AddPost">
 
     <android.support.v7.widget.AppCompatButton
@@ -12,9 +11,8 @@
         style="@style/FlatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-
-        android:layout_marginTop="80dp"
+    android:layout_centerHorizontal="true"
+        android:layout_below="@id/iv_post_img_"
         android:hint="Select Image" />
 
 
@@ -24,19 +22,8 @@
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+
         android:background="@drawable/imageboarder"
-        />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_post_imageupload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="80dp"
-        android:layout_toRightOf="@id/iv_post_img_"
-        android:text="Upload Image"
-        android:background="@drawable/plainbutton"
-
         />
 
     <android.support.design.widget.TextInputLayout
@@ -44,7 +31,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_post_img_"
+        android:layout_below="@id/btn_post_selectimage"
         android:layout_margin="20dp">
 
         <android.support.v7.widget.AppCompatEditText
@@ -109,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/til_postdesc"
-        android:layout_margin="32dp"
+        android:layout_margin="20dp"
         android:background="@drawable/buttonlayout"
         android:text="Add Post" />
 

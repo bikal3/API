@@ -1,6 +1,7 @@
 package com.example.travelnepalapp.API;
 
 import com.example.travelnepalapp.Models.PostModel;
+import com.example.travelnepalapp.Models.Success;
 import com.example.travelnepalapp.Models.UserModel;
 
 import java.util.List;
@@ -24,13 +25,13 @@ public interface PostAPI {
 
     @FormUrlEncoded
     @POST("users/post")
-    Call<String> addpost(@Field("title") String title,
-                         @Field("location") String location,
-                         @Field("image") String image,
-                         @Field("description") String description,
-                         @Field("user") String user,
-                         @Field("token") String token,
-                         @Field("_id") String id
+    Call<Success> addpost(@Field("title") String title,
+                          @Field("location") String location,
+                          @Field("image") String image,
+                          @Field("description") String description,
+                          @Field("user") String user,
+                          @Field("token") String token,
+                          @Field("_id") String id
     );
 
     @FormUrlEncoded

@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitHelper {
     private static Retrofit retrofit;
 
+
     public static Retrofit instance() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()

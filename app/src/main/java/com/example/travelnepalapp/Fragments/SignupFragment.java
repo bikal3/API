@@ -2,9 +2,11 @@ package com.example.travelnepalapp.Fragments;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,9 +18,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.UserAPI;
+import com.example.travelnepalapp.BusinessLogic.Registerquery;
+import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.Models.UserModel;
+import com.example.travelnepalapp.Notification;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
+import com.example.travelnepalapp.StrictMode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -81,8 +87,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
     }
 
-
     private void registration() {
+        String success;
         String fullname = name.getText().toString();
         String emails = email.getText().toString();
         String user = username.getText().toString();
@@ -90,28 +96,60 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         String passs = passwordds.getText().toString();
 
         UserModel userModel = new UserModel(fullname, emails, user, pass, passs);
-        UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
-        Call<String> usercall = userAPI.addUser(userModel);
-        usercall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
-                    TabLayout tabs = (TabLayout) getActivity().findViewById(R.id.tablayout);
-                    tabs.getTabAt(1).select();
-                    return;
-                }
-                String res = response.body();
+        Registerquery registerquery= new Registerquery(userModel);
+        StrictMode();
+        if(registerquery.register().isEmpty()){
+            Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            Vibrator vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vibe.vibrate(100);
+        }
+        else {
+            Toast.makeText(getActivity(), "Succesfull", Toast.LENGTH_SHORT).show();
+            Notification.givenotification(getActivity(),"Register Successfully");
+            TabLayout tabs = (TabLayout) getActivity().findViewById(R.id.tablayout);
+            tabs.getTabAt(0).select();
 
-                Toast.makeText(getActivity(), res, Toast.LENGTH_SHORT).show();
-            }
+        }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getActivity(), "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
     }
+    private void StrictMode() {
+        android.os.StrictMode.ThreadPolicy policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
+        android.os.StrictMode.setThreadPolicy(policy);
+    }
+
+
+//    private void registration() {
+//        String fullname = name.getText().toString();
+//        String emails = email.getText().toString();
+//        String user = username.getText().toString();
+//        String pass = passwords.getText().toString();
+//        String passs = passwordds.getText().toString();
+//
+//        UserModel userModel = new UserModel(fullname, emails, user, pass, passs);
+//        UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
+//        Call<String> usercall = userAPI.addUser(userModel);
+//        usercall.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                if (!response.isSuccessful()) {
+//                    Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
+//                    TabLayout tabs = (TabLayout) getActivity().findViewById(R.id.tablayout);
+//                    tabs.getTabAt(1).select();
+//                    return;
+//                }
+//                String res = response.body();
+//
+//                Toast.makeText(getActivity(), res, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(getActivity(), "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     private void UploadImage(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

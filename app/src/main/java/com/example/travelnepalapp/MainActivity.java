@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 List<PostModel> list= response.body();
                 Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
                 recyclerAdapter.setAdapter(new DashboardAdapter(MainActivity.this, list));
-                recyclerAdapter.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                recyclerAdapter.setLayoutManager(new GridLayoutManager(MainActivity.this,2));
 
 
             }
@@ -180,17 +180,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.updateprofile:
                 Intent intent = new Intent(MainActivity.this, UpdateProfile.class);
                 startActivity(intent);
-
-
-//                UpdateProfile updateProfile = new UpdateProfile();
-//                FragmentManager manager = getFragmentManager();
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                transaction.replace(R.id.fragment_signup, new LoginSignup());
-//                transaction.add(R.id.updateprofile, UpdateProfile());
-//                transaction.commit();
-//                android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_signup, new SignupFragment());
-//                fragmentTransaction.commit();
                 break;
 
             case R.id.addpost:

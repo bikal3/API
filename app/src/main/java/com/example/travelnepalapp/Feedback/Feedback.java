@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.FeedbackAPI;
+import com.example.travelnepalapp.Notification;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
 
@@ -65,6 +66,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 Toast.makeText(Feedback.this, "Successfully Added", Toast.LENGTH_SHORT).show();
+                Notification.givenotification(Feedback.this,"You have send your feedback");
+                resetAllField();
             }
 
             @Override
@@ -74,6 +77,12 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
+    }
+    private void resetAllField() {
+        fname.setText("");
+        lname.setText("");
+        email.setText("");
+        message.setText("");
     }
 
 

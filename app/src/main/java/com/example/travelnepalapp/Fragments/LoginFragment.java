@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaCodec;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.UserAPI;
+import com.example.travelnepalapp.BusinessLogic.Loginquery;
 import com.example.travelnepalapp.MainActivity;
 import com.example.travelnepalapp.Models.Authtoken;
 import com.example.travelnepalapp.Models.Authtoken;
@@ -44,6 +46,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     Boolean isloggedin;
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
+    Loginquery lq;
+    Authtoken authtoken;
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" + //at least 1 digit
@@ -84,8 +88,36 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-                checkUser();
+//                checkUser();
+                if (loginvalidation()) {
+                    final String emails = email.getText().toString();
+                    final String pass = password.getText().toString();
+                    Loginquery login = new Loginquery(emails, pass);
+                    StrictMode();
+                    authtoken = login.checkUser();
+                    Toast.makeText(getContext(), authtoken.getSuccess(), Toast.LENGTH_SHORT).show();
 
+                    if (authtoken.getSuccess().equals("Success!")) {
+                        editor.putString("username", authtoken.getUsername());
+                    editor.putString("token", authtoken.getToken());
+                    editor.putString("_id", authtoken.getId());
+                    editor.putString("email", emails);
+                    isloggedin=true;
+                    editor.putBoolean("loginchecker",isloggedin);
+
+
+                    editor.commit();
+
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                        Vibrator vibrator=(Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(100);
+
+                    }
+//                }
+                }
                 break;
             case R.id.btn_signup:
                 TabLayout tabs = (TabLayout) getActivity().findViewById(R.id.tablayout);
@@ -143,48 +175,49 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-
-    private void checkUser() {
-        if (loginvalidation()) {
-            final String emails = email.getText().toString().trim();
-            final String pass = password.getText().toString().trim();
-
-            UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
-            Call<Authtoken> logincall = userAPI.login(emails, pass);
-
-            logincall.enqueue(new Callback<Authtoken>() {
-                @Override
-                public void onResponse(Call<Authtoken> call, Response<Authtoken> response) {
-                    Authtoken token = response.body();
-                    if (!response.isSuccessful()) {
-                        Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-
-                    editor.putString("username", token.getUsername());
-                    editor.putString("token", token.getToken());
-                    editor.putString("_id", token.getId());
-                    editor.putString("email", emails);
-//                    editor.putString("password", pass);
-                    isloggedin=true;
-                    editor.putBoolean("loginchecker",isloggedin);
-
-                    editor.commit();
-
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-
-                @Override
-                public void onFailure(Call<Authtoken> call, Throwable t) {
-                    Toast.makeText(getActivity(), "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-
-        }
+    private void StrictMode() {
+        android.os.StrictMode.ThreadPolicy policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
+        android.os.StrictMode.setThreadPolicy(policy);
     }
+
+//    private void checkUser() {
+//        if (loginvalidation()) {
+//            final String emails = email.getText().toString().trim();
+//            final String pass = password.getText().toString().trim();
+//
+//            UserAPI userAPI = RetrofitHelper.instance().create(UserAPI.class);
+//            Call<Authtoken> logincall = userAPI.login(emails, pass);
+//
+//            logincall.enqueue(new Callback<Authtoken>() {
+//                @Override
+//                public void onResponse(Call<Authtoken> call, Response<Authtoken> response) {
+//                    Authtoken token = response.body();
+//                    if (!response.isSuccessful()) {
+//                        Toast.makeText(getActivity(), response.code(), Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    editor.putString("username", token.getUsername());
+//                    editor.putString("token", token.getToken());
+//                    editor.putString("_id", token.getId());
+//                    editor.putString("email", emails);
+//                    isloggedin=true;
+//                    editor.putBoolean("loginchecker",isloggedin);
+//
+//                    editor.commit();
+//
+//                    Intent intent = new Intent(getActivity(), MainActivity.class);
+//                    startActivity(intent);
+//                    getActivity().finish();
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Authtoken> call, Throwable t) {
+//                    Toast.makeText(getActivity(), "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                }
+//            });
+//
+//
+//        }
+//    }
 }

@@ -16,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.PostAPI;
+import com.example.travelnepalapp.Models.Success;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
+import com.example.travelnepalapp.Users.UpdateProfile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,13 +58,11 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
 
         //buttons
         btnaddpost = findViewById(R.id.btn_post_addpost);
-        btnimageupload = findViewById(R.id.btn_post_imageupload);
         btnselectimage = findViewById(R.id.btn_post_selectimage);
 
         //imageview
         postimage = findViewById(R.id.iv_post_img_);
         btnselectimage.setOnClickListener(this);
-        btnimageupload.setOnClickListener(this);
         btnaddpost.setOnClickListener(this);
 
     }
@@ -79,9 +79,6 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
 
                 break;
 
-            case R.id.btn_post_imageupload:
-                uploadImage(bitmap);
-                break;
 
         }
 
@@ -154,60 +151,71 @@ private void Opengallery() {
     startActivityForResult(Intent.createChooser(gallery, "Choose Image"), PICK_IMAGE);
 
 }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
-            imageUri = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                postimage.setImageBitmap(bitmap);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
-
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+//            imageUri = data.getData();
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+//                postimage.setImageBitmap(bitmap);
+//                uploadImage(bitmap);
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//
+//            }
+//
+//        }
+//
+//    }
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+        imageUri = data.getData();
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+            postimage.setImageBitmap(bitmap);
+            uploadImage(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
+}
     private void uploadImage(Bitmap bitmap) {
-        ByteArrayOutputStream stream= new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100, stream);
-        byte[] bytes=stream.toByteArray();
-        try{
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] bytes = stream.toByteArray();
+        try {
 
-            File file= new File(this.getCacheDir(),"image.jpeg");
+            File file = new File(getCacheDir(), "image.jpeg");
             file.createNewFile();
-            FileOutputStream fos= new FileOutputStream(file);
+            FileOutputStream fos = new FileOutputStream(file);
             fos.write(bytes);
             fos.flush();
             fos.close();
 
-            RequestBody rb= RequestBody.create(MediaType.parse("multipart/form-data"),file);
-            MultipartBody.Part body=MultipartBody.Part.createFormData("imageName",file.getName(),rb);
+            RequestBody rb = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("imageName", file.getName(), rb);
 
-            PostAPI heroAPI= RetrofitHelper.instance().create(PostAPI.class);
-            Call<String> imageModelCall=heroAPI.uploadImage(body);
+            PostAPI heroAPI = RetrofitHelper.instance().create(PostAPI.class);
+            Call<String> imageModelCall = heroAPI.uploadImage(body);
             imageModelCall.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     Toast.makeText(AddPost.this, response.body(), Toast.LENGTH_SHORT).show();
                     imagename.setText(response.body());
-
-
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(AddPost.this, "Error"+ t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(AddPost.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
 
         }
@@ -224,16 +232,22 @@ private void Opengallery() {
         String user=preferences.getString("_id",null);
 
         PostAPI postAPI=RetrofitHelper.instance().create(PostAPI.class);
-        Call<String> postcall=postAPI.addpost(title,location,image,desc,user,token,id);
-        postcall.enqueue(new Callback<String>() {
+        Call<Success> postcall=postAPI.addpost(title,location,image,desc,user,token,id);
+        postcall.enqueue(new Callback<Success>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(context, "Post Added", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<Success> call, Response<Success> response) {
+                Success success=response.body();
+                if(success.getSuccess().equals("'Post successfully Placed!!!")){
+                    Toast.makeText(context, "Added Post", Toast.LENGTH_SHORT).show();
+
 //                reset();
+                }
+                Toast.makeText(context, "Added Post", Toast.LENGTH_SHORT).show();
+
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(context, "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Success> call, Throwable t) {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
 
             }
         });

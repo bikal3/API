@@ -7,7 +7,6 @@
     tools:context=".Post.PostDashboard">
 
 
-
     <android.support.v7.widget.CardView
         android:id="@+id/card1"
         android:layout_width="wrap_content"
@@ -15,8 +14,7 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        >
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_pc_post_image"
@@ -37,83 +35,101 @@
                 android:textSize="30dp" />
 
 
-
-
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView
         android:id="@+id/card2"
-        android:layout_below="@id/card1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        >
+        android:layout_below="@id/card3"
+        android:layout_margin="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
 
-            <android.support.v7.widget.AppCompatImageView
+            <!--<android.support.v7.widget.AppCompatImageView-->
+                <!---->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:paddingTop="10dp"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:src="@drawable/ic_person_black_24dp" />-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/iv_pc_user_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_person_black_24dp"/>
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/ic_person_black_24dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#FF000000"/>
+
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_post_user_name"
-                android:layout_toRightOf="@id/iv_pc_user_image"
-                android:textSize="30dp"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/iv_pc_user_image"
+                android:paddingTop="10dp"
+
                 android:text="Bikal"
-                />
+                android:textAllCaps="true"
+                android:textSize="25dp" />
+
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_post_user_desc"
-                android:layout_below="@id/tv_post_user_name"
-                android:layout_toRightOf="@id/iv_pc_user_image"
-                android:textSize="20dp"
-                android:textAlignment="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bikal"
-                />
+                android:layout_toRightOf="@id/iv_pc_user_image"
+                android:layout_below="@id/tv_post_user_name"
+                android:padding="20dp"
+                android:text="my name is bikal shrestha and i live in kathmandu bhatti ma gayera"
+                android:textSize="15dp" />
+
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card"
+        android:id="@+id/card3"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@id/card2"
-        android:layout_margin="20dp"
-        >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card1"
+        android:layout_margin="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content">
 
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_pc_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="20dp"
                 android:text="title"
                 android:textAllCaps="true"
-                android:textSize="30dp" />
+                android:textSize="20dp" />
+            <View
+                android:layout_below="@+id/tv_pc_title"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#000000">
+
+            </View>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_pc_desc"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/tv_pc_title"
+                android:padding="15dp"
                 android:text="It is near to the village named as guddii and have to walk 2 hrs from village to reach the destination"
                 android:textSize="20dp" />
 
@@ -121,14 +137,15 @@
 
 
     </android.support.v7.widget.CardView>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_post_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/comments"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
-        android:layout_alignParentRight="true" />
+        android:src="@drawable/comments" />
 
 </RelativeLayout>
