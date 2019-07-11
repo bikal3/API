@@ -4,13 +4,10 @@ package com.example.travelnepalapp.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaCodec;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,20 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.travelnepalapp.API.UserAPI;
 import com.example.travelnepalapp.BusinessLogic.Loginquery;
-import com.example.travelnepalapp.MainActivity;
+import com.example.travelnepalapp.Activities.MainActivity;
 import com.example.travelnepalapp.Models.Authtoken;
-import com.example.travelnepalapp.Models.Authtoken;
-import com.example.travelnepalapp.Models.UserModel;
 import com.example.travelnepalapp.R;
-import com.example.travelnepalapp.Retrofit.RetrofitHelper;
 
 import java.util.regex.Pattern;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**

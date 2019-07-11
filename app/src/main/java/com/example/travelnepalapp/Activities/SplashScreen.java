@@ -1,4 +1,4 @@
-package com.example.travelnepalapp;
+package com.example.travelnepalapp.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Users.LoginSignup;
 
 public class SplashScreen extends AppCompatActivity {

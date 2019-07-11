@@ -1,10 +1,8 @@
 package com.example.travelnepalapp.Fragments;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.TabLayout;
@@ -14,17 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.UserAPI;
 import com.example.travelnepalapp.BusinessLogic.Registerquery;
-import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.Models.UserModel;
-import com.example.travelnepalapp.Notification;
+import com.example.travelnepalapp.Activities.Notification;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
-import com.example.travelnepalapp.StrictMode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -31,8 +31,8 @@
         <activity android:name=".Post.AddPost" />
         <activity android:name=".Users.UpdateProfile" />
         <activity android:name=".Users.LoginSignup" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

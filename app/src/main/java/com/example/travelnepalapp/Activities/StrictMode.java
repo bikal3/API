@@ -1,4 +1,4 @@
-package com.example.travelnepalapp;
+package com.example.travelnepalapp.Activities;
 
 public class StrictMode {
 

@@ -6,10 +6,12 @@
     android:padding="25dp"
     android:layout_gravity="top"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:background="@drawable/ic_launcher_background"
+    android:background="@drawable/backgroundgradient"
     >
 <ImageView
     android:id="@+id/navimage"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="10dp"
     android:layout_width="56dp"
     android:layout_height="56dp"
     android:src="@drawable/ic_launcher_foreground"
@@ -18,16 +20,20 @@
     />
 <TextView
     android:id="@+id/nav_name"
+    android:layout_marginLeft="10dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/bikal_shrestha"
     android:paddingTop="8dp"
+    android:textColor="#000000"
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
     <TextView
         android:id="@+id/nav_email"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bikal3_bs_gmail_com"
-        android:paddingTop="4dp"/>
+        android:textColor="#000000"
+        android:paddingTop="2dp"/>
 
 </LinearLayout>

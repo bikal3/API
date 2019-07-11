@@ -10,16 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.travelnepalapp.API.FeedbackAPI;
 import com.example.travelnepalapp.BusinessLogic.Feedbackquery;
-import com.example.travelnepalapp.Notification;
+import com.example.travelnepalapp.Activities.Notification;
 import com.example.travelnepalapp.R;
-import com.example.travelnepalapp.Retrofit.RetrofitHelper;
-import com.example.travelnepalapp.StrictMode;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.travelnepalapp.Activities.StrictMode;
 
 public class Feedback extends AppCompatActivity implements View.OnClickListener {
 

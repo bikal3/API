@@ -2,31 +2,23 @@ package com.example.travelnepalapp.Comment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.icu.text.UnicodeSetSpanner;
 import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.travelnepalapp.API.CommentAPI;
 import com.example.travelnepalapp.Adapters.CommentAdapter;
 import com.example.travelnepalapp.BusinessLogic.Commentquery;
-import com.example.travelnepalapp.Feedback.Feedback;
 import com.example.travelnepalapp.Models.CommentModel;
-import com.example.travelnepalapp.Models.UserModel;
 import com.example.travelnepalapp.R;
 import com.example.travelnepalapp.Retrofit.RetrofitHelper;
-import com.example.travelnepalapp.StrictMode;
+import com.example.travelnepalapp.Activities.StrictMode;
 
 import java.util.ArrayList;
 import java.util.List;
