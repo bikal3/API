@@ -1,4 +1,4 @@
-##TRAVEL NEPAL
+## TRAVEL NEPAL
 The title of the project is Travel Nepal. The project is about posting the travel blogs of the user and other user can comment on the post of the blogs.
 there are many information gathering process regarding the different places of Nepal that helps the travelers to 
 visit those places. People find their travel destinations from different sources like books, website, recommendations 
