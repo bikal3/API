@@ -18,15 +18,22 @@ Though the main function of the application is not futures yet about providing t
 own experience about thier own travel from which they can get abit of information and reviews of that place which would be 
 benefits  form other user who would travel thoes place. 
 
-## Aims and Objective 
+## Aims 
 The Aims of my project is to promote the tourism in Nepal as well as to show the hidden part of the Nepal through 
 android application requesting the user to post most unique place of the Nepal. 
 
-## Features
+## Objective
     • To make the application user friendly.
     • To be able to build review system in the post.
     • To add the itineraries of the different places.  
     • To promote the under-rated places of Nepal as well as the tourism.
+    
+ ## Features
+    • User can add post about their expereince of travel
+    • Users can add comment on the post.
+    • Users are able to send the feedback of app
+    • Users are able to update thier profile description and image.
+ 
     
 
 ## RestClient
